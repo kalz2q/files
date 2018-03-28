@@ -16,3 +16,21 @@ git cloneして、そのなかから使うものを使う、というのがい�
 github上で開いて、rawにしてコピペするのも簡単かもしれない。  
 全部テキストファイルです。
 
+Jupyterはデフォルトでpythonが使えますが、他の言語はカーネルをいれなければ使えません。  
+```
+Haskell : ihaskell
+Julia  : ijuia
+JavaScript : ijavascript
+Ruby : iruby
+Gopher : gophernotes
+```
+以上については、
+```
+sudo add-apt-repository ppa:chronitis/jupyter
+sudo apt-get update
+sudo apt-get install <kernelname>
+```
+で一発で入ります。
+
+C++についてはちょっと面倒なので、別ファイルに書きました。`cpp_cling_howto.txt` 参考にしてください。
+
