@@ -1,5 +1,5 @@
 # files
-public file repository maily ipynb jupyter notebooks
+public file repository mainy ipynb jupyter notebooks
 
 えっと。日本語で書いたほうがいいかな。
 
