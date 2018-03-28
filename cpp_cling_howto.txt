@@ -1,0 +1,33 @@
+Jupyter notebookでC++を使って勉強するのは、基本的には無理です。  
+
+なぜならC++はコンパイラーであって、Jupyterにのるのはインタープリター言語だけだから。
+
+ところが！！
+
+C++をスクリプトとして使う環境があってClangとかClingとかなのですが、それならJupyterのkernelとして使える。  
+そのインストール手順です。  
+Jupyter上ではC++17という名前になります。
+下記でubuntu16というのはubuntuの16.04という環境ということで、17の人やこれから出る18の場合は読み替える必要があります。
+
+インストール手順
+```
+https://root.cern.ch/download/cling/
+からバイナリーをダウンロードする。Ubuntu用しかない。
+cd ダウンロード
+解凍(展開)する。
+cd cling_2018-03-26_ubuntu16
+cd bin
+./clingでclingが使えることを確認する。`.q`で終了
+cd ../..
+mv cling_2018-03-26_ubuntu16 ~/
+ダウンロードの中では変なので自分のフォルダーの一番上に持ってくる。
+cd
+export PATH=~/cling-install-prefix/bin:$PATH
+あとで`.bashrc`にも対応すること。
+次にshareの中のkernelのところに行く。
+cd /cling-install-prefix/share/cling/Jupyter/kernel
+pip install -e . を実行する。
+次にjupyterにcling kernelをインストールする。
+jupyter-kernelspec install ~/cling_2018-03-26_ubuntu16/share/cling/Jupyter/kernel/cling-cpp17 --user
+最後に好きな場所でjupyter notebooを起動して、NewにC++17があることを確認する。
+```
