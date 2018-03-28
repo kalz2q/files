@@ -6,7 +6,7 @@ public file repository mainy ipynb jupyter notebooks
 jupyter notebookでいろいろ勉強しています。
 
 その際、人のnotebookを見たい。  
-notebookで書かれた例えばRの入門書とかないか。  
+notebookで書かれた例えばRの入門書とかないか。  
 とか思うのですがなかなかなかったりするので、つくりかけでもなんかの参考になるかと思い、アップすることにしました。  
 
 その置き場に使う予定。
