@@ -34,3 +34,6 @@ sudo apt-get install <kernelname>
 
 C++についてはちょっと面倒なので、別ファイルに書きました。`cpp_cling_howto.txt` 参考にしてください。
 
+C++の勉強用のnotebookはlearncpp.ipynbです。
+
+jupyter自体は、pythonをanacondaでインストールすると一緒についてきます。
