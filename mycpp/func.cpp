@@ -1,5 +1,6 @@
 //func.cpp
 #include <iostream>
+using namespace std;
 void test() {
-    std::cout << "just a test" << std::endl;
+    cout << "just a test" << endl;
 }
