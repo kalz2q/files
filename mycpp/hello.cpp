@@ -1,6 +1,7 @@
 // hello.cpp
 #include <iostream>
+using namespace std;
 void hello () 
 {
-    std::cout << "hello world" << std::endl;
+    cout << "hello world" << endl;
 }
