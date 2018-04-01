@@ -37,3 +37,6 @@ C++についてはちょっと面倒なので、別ファイルに書きまし�
 C++の勉強用のnotebookはlearncpp.ipynbです。
 
 jupyter自体は、pythonをanacondaでインストールすると一緒についてきます。
+
+こは本です。
+これはペンです。
