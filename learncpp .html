@@ -12156,6 +12156,7 @@ int main ()
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>以上を評価すると、ちゃんと9が表示され、nが9になっているのがわかります。</p>
+<p>しかし！ メタコマンドの<code>.rawInput</code>を使わなくても、普通に書いてセルを評価したら関数定義できて、使えました。</p>
 
 </div>
 </div>
@@ -12202,6 +12203,57 @@ C++をインタープリターとして使うと勉強がはかどるのでは�
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>目的のとおりに表示できました。<br>
+これを<code>main()</code>の形のプログラムにすると、うまく行くこともありますが、Jupyterの挙動がおかしくなります。</p>
+<p>一旦'Restart &amp; Clear Output'してから下の2つのセルを評価して見てください。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;時速を秒速に変換するには&quot;</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;倍して&quot;</span> <span class="o">&lt;&lt;</span> <span class="mi">10</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;で割ればほぼ一致します。&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>これを避けるには、mainではなく、別の名前mymainとかにするといいみたいです。</p>
+<p>とりあえず、この環境ではmainが特に必要な場合になってから考えよう。</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -12346,12 +12398,22 @@ void test() {
 
 </div>
 </div>
-</div>// show3+4.cpp
-#include <iostream>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+<pre><code>// show3+4.cpp
+#include &lt;iostream&gt;
 using namespace std;
 void show3and4() {
-    cout << 3 << " + " << 4 << " を計算すると " << 7 << " になります。" << endl;
-}
+    cout &lt;&lt; 3 &lt;&lt; " + " &lt;&lt; 4 &lt;&lt; " を計算すると " &lt;&lt; 7 &lt;&lt; " になります。" &lt;&lt; endl;
+}</code></pre>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
@@ -12390,12 +12452,25 @@ void show3and4() {
 
 </div>
 </div>
-</div>// uninitialized.cpp
-#include <iostream>
-void uninitialized() {
-    int uninitialized;
-    std::cout << " uninitialized: " << uninitialized << " でした。 "  << std::endl;
-}
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="c1">// uninitialized.cpp</span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="kt">void</span> <span class="nf">uninitialized</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">uninitialized</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; uninitialized: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">uninitialized</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; でした。 &quot;</span>  <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
@@ -12426,11 +12501,13 @@ void uninitialized() {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>32682になった。処理系によってちがうらしい。</p>
+<p>げっ！ セルで評価した結果の関数は32760になって、別ファイルから読み込んだ関数の結果が32682になった。<br>
+なぜだ。不思議です。</p>
 <p>問題<br>
 入力演算子<code>&gt;&gt;</code>を用いて型について考えよう。</p>
 <p><code>std:cin &gt;&gt; n</code> とか書くのですが、Jupyter上ではうまく使えない。<br>
-関数化して明示的に引数を渡すしかないと思うがどうか。</p>
+関数化して明示的に引数を渡すしかないと思うがどうか。<br>
+あとで考えよう。</p>
 <p>問題<br>
 1/2と1/2.0を表示して考察する。</p>
 
@@ -12443,6 +12520,19 @@ void uninitialized() {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="mi">1</span><span class="o">/</span><span class="mf">2.0</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
 </pre></div>
 
 </div>
@@ -12634,20 +12724,6 @@ wchar_t while   xor xor_eq</p>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-<span class="n">flag</span><span class="p">;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
@@ -12695,6 +12771,15 @@ wchar_t while   xor xor_eq</p>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>int('A')</code>は65なのですね。</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -12779,6 +12864,7 @@ wchar_t while   xor xor_eq</p>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 <span class="n">log</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">/</span> <span class="n">log</span> <span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
@@ -12983,7 +13069,7 @@ wchar_t while   xor xor_eq</p>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="kt">char</span> <span class="n">str</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;Yamada&quot;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">char</span> <span class="n">str2</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;Yamada&quot;</span>
 </pre></div>
 
 </div>
@@ -12996,7 +13082,7 @@ wchar_t while   xor xor_eq</p>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">str</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="n">str2</span><span class="p">;</span>
 </pre></div>
 
 </div>
@@ -13009,6 +13095,65 @@ wchar_t while   xor xor_eq</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>(char [7]) "Yamada"と表示されます。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="n">string</span> <span class="n">str3</span><span class="o">=</span><span class="s">&quot;Taro&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">str3</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>これは<code>(std::string &amp;) "Taro"</code>と表示されました。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">str3</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>これは<code>(char) 'a'</code>と表示されました。<code>string</code>と配列の違いがわかりません。</p>
 
 </div>
 </div>
@@ -13037,8 +13182,7 @@ wchar_t while   xor xor_eq</p>
 <p>ヘッダファイル <code>&lt;cstring&gt;</code> には、strlen(),
 strcpy(), strncpy(), strcat(), strncat(),
 strcmp(), strncmp()などがある。</p>
-<h3 id="&#25991;&#23383;&#21015;&#12398;&#26684;&#32013;">&#25991;&#23383;&#21015;&#12398;&#26684;&#32013;<a class="anchor-link" href="#&#25991;&#23383;&#21015;&#12398;&#26684;&#32013;">&#182;</a></h3><p>次のプログラムはエラーになります。</p>
-
+<h3 id="&#25991;&#23383;&#21015;&#12398;&#26684;&#32013;">&#25991;&#23383;&#21015;&#12398;&#26684;&#32013;<a class="anchor-link" href="#&#25991;&#23383;&#21015;&#12398;&#26684;&#32013;">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -13047,19 +13191,27 @@ strcmp(), strncmp()などがある。</p>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="cm">/*</span>
-<span class="cm">#include &lt;iostream&gt;</span>
-<span class="cm">using namespace std;</span>
-<span class="cm">char* weekDays [] = {” 日曜 ”,” 月曜 ”,” 火曜 ”,” 水曜 ”,” 木曜 ”,” 金曜 ”,” 土曜 ”};</span>
-<span class="cm">char* s = weekDays[2];</span>
-<span class="cm">cout &lt;&lt; ”weekDays[2]=” &lt;&lt; s &lt;&lt; ” です。\n”; }</span>
-<span class="cm">*/</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="n">string</span> <span class="n">weekDays</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot; 日曜 &quot;</span><span class="p">,</span><span class="s">&quot; 月曜 &quot;</span><span class="p">,</span><span class="s">&quot; 火曜 &quot;</span><span class="p">,</span><span class="s">&quot; 水曜 &quot;</span><span class="p">,</span><span class="s">&quot; 木曜 &quot;</span><span class="p">,</span><span class="s">&quot; 金曜 &quot;</span><span class="p">,</span><span class="s">&quot; 土曜 &quot;</span><span class="p">};</span>
+<span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="n">weekDays</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;weekDays[2]=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; です。</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>weekDays[2]= 火曜  です。<br>
+と表示されました。</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -13097,6 +13249,15 @@ strcmp(), strncmp()などがある。</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>これは(std::string &amp;) "��"と出力されました。 文字化けします。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>s1は7個の文字<br>
 s2は60個のアスタリスク<br>
 s3は60個のアスタリスク<br>
@@ -13110,7 +13271,6 @@ s5は""</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>s4が文字化けします。</p>
 <p>次はshort intとintの違いの実験です。</p>
 
 </div>
@@ -13146,28 +13306,26 @@ s5は""</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="cp"># include &lt;iostream&gt;</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">shortint</span> <span class="p">()</span>
-<span class="p">{</span>
-    <span class="kt">short</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
-    <span class="n">j</span> <span class="o">=</span> <span class="mi">60000</span><span class="p">;</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;   &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">j</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+
+<pre><code>/shortint.cpp
+# include &lt;iostream&gt;
+using namespace std;
+int shortint ()
+{
+    short int i;
+    int j;
+    j = 60000;
+    i = j;
+    cout &lt;&lt; i &lt;&lt; "   " &lt;&lt; j &lt;&lt; endl;
+    return 0;
+}</code></pre>
 
 </div>
 </div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -13188,6 +13346,53 @@ s5は""</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>-5536   60000
 と表示されました。</p>
+<p>しかし、これはセルでも作れるのではないか。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp"># include &lt;iostream&gt;</span>
+<span class="kt">int</span> <span class="nf">shortint</span> <span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">short</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">60000</span><span class="p">;</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;   &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">j</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">shortint</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>-5536   60000<br>
+と表示されました。
+問題ないみたいですが、<code>using namespace std</code>を入れると、ここでは関数は定義できません、<code>function definition is not allowed here</code>というエラーになります。</p>
 <p>次はforループの実験です。</p>
 
 </div>
@@ -13245,44 +13450,6 @@ s5は""</p>
 <p><code>!"#$%&amp;'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~</code></p>
 <p>と表示されました。<br>
 いくつあるのだろう。</p>
-<p>ところで、JupyterのC++上ではセルで関数を定義できないことはちゃんと実験していませんでした。<br>
-やってみます。</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="c1">//</span>
-<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">test2</span><span class="p">()</span> <span class="p">{</span>
-   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;関数をJupyterのセルで定義する実験&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>なるほどね。<br>
-input_line_3:5:14: error: function definition is not allowed here<br>
-と表示されます。<br>
-C++のインタープリターであるClingの仕様なので、Clingがバージョンアップされれば改善されるかもしれない。<br>
-C++がファイルを読み込んで動く仕組みなので、整合性をとることはできないのかもしれない。<br>
-ま、ともかく、いまはそういうことだろ理解して使おう。</p>
-<p>Classは作れるが、メンバー関数は作れない。<br>
-やはり不便ですね。<br>
-はやい話、Classも含めて外にファイルをつくるしかない。<br>
-とすると、そのファイルを自動でJupyterのセルで表示することができれば便利か。</p>
 <p>そういえば、ここでiPythonのマジックコマンドは使えないか。 -&gt; 使えません。</p>
 <p>関係ないかもしれないけど、こんなのを見つけました。</p>
 
@@ -13347,11 +13514,50 @@ C++がファイルを読み込んで動く仕組みなので、整合性をと�
 3
 4
 5</code></pre>
-<p>と表示されています。<br>
-これって、Jupyter上で関数が定義できてるってことではないの？<br>
-普通の関数定義がエラーになってこれがオッケーになるのはどこが違うのか。</p>
-<p><code>template &lt;class Vector&gt;</code>がついているだけじゃん。<br>
-実験してみよう。次のはネットにあった例です。</p>
+<p>と表示されています。</p>
+<p><code>template</code>ってなに。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">{</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="sc">&#39;b&#39;</span><span class="p">,</span><span class="sc">&#39;c&#39;</span><span class="p">,</span><span class="sc">&#39;d&#39;</span><span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">print_elements</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>a
+b
+c
+d</code>
+と表示されました。</p>
 
 </div>
 </div>
@@ -13393,7 +13599,7 @@ C++がファイルを読み込んで動く仕組みなので、整合性をと�
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>正しく<code>'X'</code>と表示されました。</p>
+<p><code>'X'</code>と表示されました。</p>
 <p>もうひとつネットにあった例から。</p>
 
 </div>
@@ -13548,8 +13754,7 @@ C++がファイルを読み込んで動く仕組みなので、整合性をと�
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>templateの実験だよ。と表示されます。 とりあえずしばらくこれで行くか。<br>
-よくわからないが、別ファリウにしていちいちコピペするよりよいだろう。</p>
+<p>templateの実験だよ。と表示されます。 とりあえずしばらくこれで行くか。</p>
 <p>ネットを調べたら、引数がなくても関数が機能するための、パラメーターパックという書き方があるみたい。<br>
 ちょっと使ってみる。</p>
 
@@ -13632,165 +13837,6 @@ C++がファイルを読み込んで動く仕組みなので、整合性をと�
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>(void)</code>を<code>()</code>にしてもtemplateの実験だよ。と表示されました。</p>
-<p>ということは</p>
-
-<pre><code>//hello02.cpp
-#include &lt;iostream&gt;
-template &lt;typename ...T&gt;
-int main() {
-    std::cout &lt;&lt; "hello world\n \t初めてのC++" &lt;&lt; std::endl;
-    return 0;
-}</code></pre>
-<p>として、これを読み込んだらどうなるか。<br>
-mainという名前ではダメと言われました。</p>
-
-<pre><code>//hello02.cpp
-#include &lt;iostream&gt;
-template &lt;typename ...T&gt;
-int hello() {
-    std::cout &lt;&lt; "hello world\n \t初めてのC++" &lt;&lt; std::endl;
-    return 0;
-}</code></pre>
-<p>としたら無事成功しました。</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">.</span><span class="n">L</span> <span class="p">.</span><span class="o">/</span><span class="n">mycpp</span><span class="o">/</span><span class="n">hello02</span><span class="p">.</span><span class="n">cpp</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">hello</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>まあいいか。</p>
-<p>main -&gt; mymain とすればセルで実行できます。</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt; </span><span class="cp"></span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="p">...</span><span class="n">T</span><span class="o">&gt;</span>
-<span class="kt">int</span> <span class="n">mymain</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">mymain</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>リターンコードが<code>(int) 1</code>と表示されました。</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><code>cin</code>のあるプログラムはどうなるか。</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="p">...</span><span class="n">T</span><span class="o">&gt;</span>
-<span class="kt">int</span> <span class="n">mymain</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;２つの数字を入れて下さい:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">v1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">v2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">v1</span> <span class="o">&gt;&gt;</span> <span class="n">v2</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;合計は &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">v1</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; と &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">v2</span>
-              <span class="o">&lt;&lt;</span> <span class="s">&quot; について &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; になります。&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">mymain</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-<pre><code>２つの数字を入れて下さい:
-合計は 0 と 0 について 0 になります。</code></pre>
-<p>と表示されました。<br>
-まあ仕方ないか。</p>
-<p>このプログラムをtemplateの行を削除して、mymainをmainにしてコンパイルすると、無事思っていたように動きます。</p>
-<p>コンパイルの方法:</p>
-<p>g++ prog1.cpp -o prog1</p>
-<p>出来上がったプログラムの実行方法:</p>
-<p>./prog1</p>
 <h3 id="&#12467;&#12513;&#12531;&#12488;&#12395;&#12388;&#12356;&#12390;">&#12467;&#12513;&#12531;&#12488;&#12395;&#12388;&#12356;&#12390;<a class="anchor-link" href="#&#12467;&#12513;&#12531;&#12488;&#12395;&#12388;&#12356;&#12390;">&#182;</a></h3>
 <pre><code>// が行コメント  
 /* ... */ がブロックコメント</code></pre>
@@ -13842,7 +13888,7 @@ int hello() {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>上のセルは評価するとエラーになります。</p>
+<p>このセルは評価するとエラーになります。</p>
 
 </div>
 </div>
@@ -14394,13 +14440,7 @@ int main()
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>おー！ うまくいきました。あたりまえか。<br>
-ということは、テキストのプログラムは、<code>int main(){}</code>をとって、セルのなかで実行すればよい。<br>
-別途関数をつくるときは、Clingの仕様では<code>.rawInput</code>で入力するが、C++なので<code>template &lt;typename ...T&gt;</code>を使えば、セルの中で試してみることができる。<br>
-試してうまく行ったら外部ファイルにして<code>.L</code>で読みこめばJupyter notebook上で使える。</p>
-<p>うむ。面倒ですね。<br>
-こんなにまでしてJupyter notebook上でやる意味があるのだろうか。<br>
-わたしはある、と思う。どうでしょうか。</p>
-<p>その証拠にC++の勉強がこんなに進んでいる。</p>
+ということは、テキストのプログラムは、<code>int main(){}</code>をとって、セルのなかで実行すればよい。</p>
 <p>さて、テキスト(C++ Primer, Fifth Edition)の方はすこし複雑になってきました。</p>
 <p>data_book_sales01.txtという入力用ファイルに次のような売上データが入っています。</p>
 
@@ -14509,7 +14549,7 @@ int main()
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
@@ -14526,35 +14566,743 @@ int main()
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hi </span><span class="se">\x4d</span><span class="s">O</span><span class="se">\115</span><span class="s">!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>  <span class="c1">// prints Hi MOM!</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\x41\101</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// \x は16進数、\xxxは8進数でいずれも&#39;A&#39;(65)を表す</span>
+</pre></div>
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>これはarray,,,これはstring
-</pre>
 </div>
 </div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[1]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>(std::basic_ostream&lt;char, std::char_traits&lt;char&gt; &gt;::__ostream_type &amp;) @0x7fed0ea75420
-</pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">int</span> <span class="n">month</span> <span class="o">=</span> <span class="mi">9</span><span class="p">,</span> <span class="n">day</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">month2</span> <span class="o">=</span> <span class="mo">011</span><span class="p">,</span> <span class="n">day2</span> <span class="o">=</span> <span class="mo">07</span><span class="p">;</span>
+</pre></div>
 
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">month2</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="s">&quot;who goes with F</span><span class="se">\145</span><span class="s">rgus?</span><span class="se">\012\012</span><span class="s">kkk?&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>stringの初期化の実験 s1==s2==s3で、ばななばななばななと表示されます。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="n">string</span> <span class="n">s1</span> <span class="p">{</span><span class="s">&quot;ばなな&quot;</span><span class="p">};</span>
+<span class="n">string</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">string</span><span class="p">(</span><span class="s">&quot;ばなな&quot;</span><span class="p">);</span> 
+<span class="n">string</span> <span class="n">s3</span> <span class="o">=</span> <span class="s">&quot;ばなな&quot;</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span> <span class="o">&amp;&amp;</span> <span class="n">s1</span> <span class="o">==</span> <span class="n">s3</span><span class="p">)</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s1</span> <span class="o">&lt;&lt;</span> <span class="n">s2</span> <span class="o">&lt;&lt;</span> <span class="n">s3</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="n">ifstream</span> <span class="nf">ifs</span><span class="p">(</span><span class="s">&quot;./mycpp/somedata.txt&quot;</span><span class="p">);</span>
+
+<span class="c1">// ifs &gt;&gt; int input_value; // エラー</span>
+
+<span class="kt">int</span> <span class="n">input_value</span><span class="p">;</span>
+<span class="n">ifs</span> <span class="o">&gt;&gt;</span> <span class="n">input_value</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">input_value</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="c1">// int i = {3.14} // error</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">}</span> <span class="c1">// ok</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="c1">// double salary = wage = 9999.99; // error</span>
+<span class="kt">double</span> <span class="n">wage</span> <span class="o">=</span> <span class="mf">9999.99</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">salaray</span> <span class="o">=</span> <span class="n">wage</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="n">string</span> <span class="n">global_str</span><span class="p">;</span>
+<span class="n">global_str</span><span class="p">;</span> <span class="c1">// &quot;&quot;が初期値</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>extern</code>の実験。通常の<code>int n</code>と違って、何度でも評価できる。<br>
+通常の<code>int n</code>とかは定義なので、定義はなんどもできない。<code>int n = 1</code>とかも同じ。<br>
+代入<code>n = 3</code>は何度でもできる。  見かけは<code>=</code>で似ているが、定義の時に使われているのは初期化であって、代入ではない。</p>
+<p><code>extern</code>は宣言であって、定義ではないので、以下のコードは何度でも評価できる。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">extern</span> <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>extern int n = 3;</code>と書くと、externがついていても、実態は定義なので、1度しか評価できない。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">extern</span> <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">double</span> <span class="n">Double</span><span class="o">=</span><span class="mf">3.14</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">val</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">val</span><span class="p">)</span>
+<span class="n">sum</span> <span class="o">+=</span> <span class="n">val</span><span class="p">;</span>  <span class="c1">// equivalent to sum = sum + val</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Sum of 1 to 10 inclusive is &quot;</span>
+<span class="o">&lt;&lt;</span> <span class="n">sum</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;./mycpp/Sales_item.h&quot;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>次はスコープの話。<br>
+1から10まで合計するプログラムです。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="c1">//template &lt;typename ...T&gt;</span>
+<span class="kt">int</span> <span class="nf">sum</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">val</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">sum</span> <span class="o">+=</span> <span class="n">val</span><span class="p">;</span> 
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Sum of 1 to 10 inclusive is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>これはうまく行った。<code>Sum of 1 to 10 inclusive is 55</code>と表示される。のですが、なんとなく、<code>template &lt;typename ...T&gt;</code>がわからないので、ネットで検索したサンプルで少し実験します。</p>
+<p>次の例は引数がintでもdoubleでも同じ関数で計算するという、本来のtemplateの例と言っていいのかな。<br>
+<code>constrexpr</code>がわからないのはともかく、これってグローバル変数なのですか。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">constexpr</span> <span class="n">T</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">T</span><span class="p">(</span><span class="mf">3.1415926535897932385</span><span class="n">L</span><span class="p">);</span>  <span class="c1">// variable template</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">T</span> <span class="n">circular_area</span><span class="p">(</span><span class="n">T</span> <span class="n">r</span><span class="p">)</span> <span class="c1">// function template</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">pi</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">r</span><span class="p">;</span> <span class="c1">// pi&lt;T&gt; is a variable template instantiation</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">circular_area</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>とりあえず期待していたように動く。</p>
+
+<pre><code>circular_area(1) // (int) 3
+circular_area(1.0) // (double) 3.1415927</code></pre>
+<p>となります。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">constexpr</span> <span class="n">T</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">T</span><span class="p">(</span><span class="mf">3.1415926535897932385</span><span class="n">L</span><span class="p">);</span>  <span class="c1">// variable template</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="n">T</span> <span class="n">add_pi</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">pi</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">add_pi</span><span class="p">(</span><span class="mf">80.5</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="c1">// T three = T(3.0);</span>
+<span class="c1">// T three = 3;</span>
+<span class="n">T</span> <span class="n">three</span> <span class="o">=</span> <span class="sc">&#39;A&#39;</span><span class="p">;</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">T</span> <span class="n">add_three</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">three</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">three</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">T</span> <span class="n">add_twice</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="k">return</span> <span class="n">add_three</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">add_twice</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>なるほど。少なくとも、JupyterのC++上では、グローバル変数のように扱える。<br>
+よくわからないが、ま、先へ進もう。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">!=</span><span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">sum</span> <span class="o">+=</span><span class="n">i</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>100:45</code>と表示されます。</p>
+<p>100と表されるiとforの中のiがスコープが違うということかな。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">int</span> <span class="nf">twice</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">twice</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">twice</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>上の<code>twice</code>の例は、twice()を定義したセルがあって、twice()が使えるようになって、それを<code>cout</code>するにはヘッダーが必要、という例。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">reused</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">int</span> <span class="nf">mymain</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">unique</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">reused</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">unique</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">reused</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// new, local object named reused hides global reused</span>
+    <span class="c1">// output #2: uses local reused; prints 0 0</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">reused</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">unique</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="c1">// output #3: explicitly requests the global reused; prints 42 0</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">::</span><span class="n">reused</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">unique</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">mymain</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>これは、目的通り、</p>
+
+<pre><code>42 0
+0 0
+42 0</code></pre>
+<p>と出力されます。</p>
+<p>うむ。またちょっと混乱してきた。上記のmymain()の定義の中でグローバル変数reusedを使っているので、そのセルを評価してからでないと評価できない。</p>
+<p>で、グローバル変数を評価しているセルの内容と一緒にして評価すると、ここでは関数定義できません、というエラーになる。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">reused</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">mymain</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">unique</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">reused</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">unique</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">reused</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// new, local object named reused hides global reused</span>
+    <span class="c1">// output #2: uses local reused; prints 0 0</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">reused</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">unique</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="c1">// output #3: explicitly requests the global reused; prints 42 0</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">::</span><span class="n">reused</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">unique</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>error: function definition is not allowed here</code>となります。</p>
+<p>とりあえず、分ければいい、と覚えておこう。<br>
+関数定義を複数やりたいときも分けて定義することになる。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">int</span> <span class="nf">add_three</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">three</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">three</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">int</span> <span class="nf">add_twice</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="k">return</span> <span class="n">add_three</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">add_twice</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>add_three()の関数定義とadd_twice()の関数定義を一つのセルに入れると、後のほうの定義がここでは関数定義はできませんというエラーになります。</p>
+<p>分ければ問題ない。<br>
+しかし！！ ちょっと前に<code>template&lt;class T&gt;</code>をつけて一つのファイルでやってたよね。<br>
+あれは別世界の話か。<br>
+勉強を続ければまた出てくるでしょう。</p>
+<h3 id="&#21442;&#29031;&#22793;&#25968;">&#21442;&#29031;&#22793;&#25968;<a class="anchor-link" href="#&#21442;&#29031;&#22793;&#25968;">&#182;</a></h3><p>次は参照変数の話です。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">int</span> <span class="n">ival</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">refVal</span> <span class="o">=</span> <span class="n">ival</span><span class="p">;</span> <span class="c1">// refValはivalの別名</span>
+<span class="c1">// int &amp;refVal2; // エラー</span>
+
+<span class="n">refVal</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>1024</code>と表示されます。</p>
+<p>参照変数は値をコピーするのではなくて、同じオブジェクトに束縛されます。
+束縛先を変えることはできません。定義時に初期化する（束縛する）必要があります。<br>
+参照変数はオブジェクトではなく、aliasです。</p>
+<p>次の例ではrefValに2を代入すると、ivalが2になっているのがわかります。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">refVal</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">ival</span>
+</pre></div>
+
+</div>
 </div>
 </div>
 

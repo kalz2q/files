@@ -1,0 +1,2177 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{learncpp}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{JupyterでC++を勉強するぞ！}\label{jupyterux3067cux3092ux52c9ux5f37ux3059ux308bux305e}
+
+とは言え、なにをいれたらいいかわかりません。\\
+まずはいろいろ実験してみよう。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{int} \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{5}
+\end{Verbatim}
+
+
+    int n = 5 みたいのを2回評価しようとすると叱られます。\\
+同じ変数は再定義エラーになる。
+
+一行にいくつも書くのでなければセミコロンはひつようないみたい。
+
+Kernelメニューの\texttt{Restart\ \&\ Clear\ Output}
+とかをしょっちゅうやる必要があるのかな。\\
+\texttt{Help}メニューでキーボード・ショートカットを編集できる。\\
+\texttt{Restart\ \&\ Clear\ Output}
+についてはショートカットがなかったので、Ctrl-G, Ctrl-G
+というショートカットにしました。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{n}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{n}\PY{o}{+}\PY{o}{+}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{+}\PY{o}{+}\PY{n}{n}\PY{p}{;}
+\end{Verbatim}
+
+
+    上の3つは評価する(実行する)と、アウトプットはそれぞれ5, 5, 7になります。
+
+「実行する」でもいいけど、「評価する」のほうがいい気がするので「評価する」を使います。\\
+キーボード・ショートカットは Ctrl-Enterです。\\
+これはわかりやすい。
+
+マークダウンセルもCtrl-Enterすると綺麗に書きなおしてくれます。
+
+Shiftをおしていくつかのセルを選んでCtrl-Enterを押すと全部（上から順に）評価してくれます。
+
+    C++ Clingの紹介ビデオ YouTube
+を見ると、メタコマンド\texttt{.help}の話があります。
+
+これはなんなんだろう。やってみよう。
+
+やってみたところ、英語のファイルがでてきた。どうしようか。これでは困る。
+
+少し試してみたけど、ビデオでも紹介のあった、ファイルやライブラリーをロードする".L"というメタコマンドだけ覚えておけばいいみたいです。
+
+    \subsubsection{Jupyterのキーボード・ショートカット}\label{jupyterux306eux30adux30fcux30dcux30fcux30c9ux30b7ux30e7ux30fcux30c8ux30abux30c3ux30c8}
+
+Jupyterを効率よく使うにはキーボード・ショートカットは欠かせません。\\
+別途jupyterKeys.txtというファイルを用意しましたので参考にしてください。
+
+    \begin{verbatim}
+Fキー: 検索と置換
+Ctrl-Shift-Fキー: コマンドパレットを開く
+Ctrl-Shift-Pキー: コマンドパレットを開く
+Enterキー: 編集モードに入る
+Pキー: コマンドパレットを開く
+Shift-Enterキー: セルを評価して、下のセルを選択
+Ctrl-Enterキー: 選択したセルを評価
+Alt-Enterキー: セルを評価して、下に新規セル挿入
+Yキー: コードモードに
+Mキー: マークダウンモードに
+Rキー: raw（テキスト）モードに
+1キー: 「見出し１（大見出し）」で書き出す
+2キー: 「見出し２（中見出し）」で書き出す
+3キー: 「見出し３」で書き出す
+4キー: 「見出し４」で書き出す
+5キー: 「見出し５」で書き出す
+6キー: 「見出し６」で書き出す
+Kキー: 上のセルに移動
+Upキー: 上のセルに移動
+Downキー: 下のセルに移動
+Jキー: 下のセルに移動
+Shift-Kキー: 上のセルを複数選択
+Shift-Upキー: 上のセルを複数選択
+Shift-Downキー: 下のセルを複数選択
+Shift-Jキー: 下のセルを複数選択
+Aキー: セルを上に挿入
+Bキー: セルを下に挿入
+Xキー: セルを切り取り
+Cキー: セルをコピー
+Shift-Vキー: セルを上に挿入してペースト
+Vキー: セルを下に挿入してペースト
+Zキー: 削除したセルを戻す
+DDキー: 選択したセルを削除
+Shift-Mキー: セルを統合
+Ctrl-Sキー: 保存とチェックポイント
+Sキー: 保存とチェックポイント
+Lキー: セルの中の行番号を表示
+Oキー: 選択セルの評価結果を表示
+Shift-Oキー: 選択セルの評価結果をスクロール表示
+Hキー: ショートカットキーを表示
+IIキー: カーネルを中断
+00キー: カーネルをリスタート
+Shift-Lキー: 行番号を表示/非表示
+Shift-Spaceキー: 上にスクロール
+Spaceキー: 下にスクロール
+Tabキー: コード自動補完、インデント
+Shift-Tabキー: ツールチップ（tooltip）
+Ctrl-]キー: インデント
+Ctrl-[キー: インデント消す
+Ctrl-Aキー: 全選択
+Ctrl-Zキー: 元に戻す
+Ctrl-/キー: コメント
+Ctrl-Dキー: 行を削除
+Ctrl-Uキー: 選択をやり直す
+Insertキー: 挿入/上書きモード切り替え
+Ctrl-Homeキー: 最初のセルに移動
+Ctrl-Upキー: セルの最初に移動
+Ctrl-Downキー: セルの最後に移動
+Ctrl-Endキー: 最後のセルに移動
+Ctrl-Leftキー: １単語左に移動
+Ctrl-Rightキー: １単語右に移動
+Ctrl-Backspade: 左の単語を消去
+Ctrl-Delete: 右の単語を消去
+Ctrl-Yキー: やり直す
+Alt-Uキー: 選択をやり直す
+Ctrl-Mキー: コマンドモード
+Ctrl-Shift-Fキー: コマンドパレットを開く
+Ctrl-Shift-Pキー: コマンドパレットを開く
+Escキー: コマンドモード
+Shift-Enterキー: セルを評価して、下のセルを選択
+Ctrl-Enterキー: 選択したセルを評価
+Alt-Enterキー: セルを評価して、下にセルを挿入
+Ctrl-Shift--キー: セルを分割
+Ctrl-Sキー: 保存とチェックポイント
+Downキー: カーソルを下に移動
+Upキー: カーソルを上に移動
+\end{verbatim}
+
+    \subsubsection{ハローワールド}\label{ux30cfux30edux30fcux30efux30fcux30ebux30c9}
+
+ふつうのテキストにあるハローワールドのプログラムをこの環境でどう走らせるか。
+
+\begin{verbatim}
+//sample.cpp
+#include <iostream>
+using namespace std;
+int main ()
+{
+    cout << "はろー！ 世界！！";
+    return 0;
+}
+\end{verbatim}
+
+JupyterのHomeに行って、すきな場所で\texttt{New}ボタンのメニューから\texttt{Text}を選びます。\\
+ファイル名をsample.txtにして、上記のコードを打ち込みます。\\
+このテキストに戻って、\texttt{.L}を使って、ロードします。\\
+ロードできたら、main()関数を評価します。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{p}{.}\PY{n}{L} \PY{p}{.}\PY{o}{/}\PY{n}{mycpp}\PY{o}{/}\PY{n}{sample}\PY{p}{.}\PY{n}{cpp}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{main}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    "はろー！ 世界！！"\\
+と表示されると思います。\\
+エラーがでるようでしたら、\texttt{Kernel}メニューの\texttt{Restart\ \&\ Clear\ Output}を実行してから再度やってみて下さい。
+
+    \subsubsection{関数}\label{ux95a2ux6570}
+
+関数
+function()を定義するには\texttt{.rawInput}を用いるらしいが、これもよくわからない。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{// コメントはつかえるのかな}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cm}{/* 複数行に}
+        \PY{c+cm}{わたるコメントはどうか */}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{k+kt}{int} \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{;}
+        \PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{n} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{番目の方どうぞ！}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    これは、"3番目の方どうぞ！"と表示されます。
+
+次に\texttt{.rawInput}を使った関数定義の実験です。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{p}{.}\PY{n}{rawInput}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{void} \PY{n+nf}{increase}\PY{p}{(}\PY{k+kt}{int}\PY{o}{\PYZam{}} \PY{n}{x}\PY{p}{)}\PY{p}{\PYZob{}} \PY{o}{+}\PY{o}{+}\PY{n}{x}\PY{p}{;}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{p}{.}\PY{n}{rawInput}
+\end{Verbatim}
+
+
+    実際に使ってみることができます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{int} \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{8}\PY{p}{;}
+        \PY{n}{increase}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{;}\PY{n}{n}\PY{p}{;}
+\end{Verbatim}
+
+
+    以上を評価すると、ちゃんと9が表示され、nが9になっているのがわかります。
+
+しかし！
+メタコマンドの\texttt{.rawInput}を使わなくても、普通に書いてセルを評価したら関数定義できて、使えました。
+
+    途中ですが、いまの環境を書いておきます。\\
+Ubuntu 16.04 でいま2018年3月なのでもうすぐ18.04になるかもしれない。\\
+C++をインタープリターとして使うと勉強がはかどるのではないか、と思って入れてみました。\\
+以上
+
+簡単なのでいいからプログラムの形でセルに入れたいね。\\
+やってみよう。
+
+    \subsubsection{文字リテラル}\label{ux6587ux5b57ux30eaux30c6ux30e9ux30eb}
+
+大文字のAは10進数で65。2進数で1000001。16進数で0x41。8進数では0101。
+データ型の具体的な値をリテラルという。\\
+文字型(char)のリテラルの例は'A'。stringの例が"hello"。
+
+問題\\
+時速を秒速に変換するには3倍して10で割ればほぼ一致します。\\
+と表示せよ。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{時速を秒速に変換するには}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+m+mi}{3} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{倍して}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+m+mi}{10} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{で割ればほぼ一致します。}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    目的のとおりに表示できました。\\
+これを\texttt{main()}の形のプログラムにすると、うまく行くこともありますが、Jupyterの挙動がおかしくなります。
+
+一旦'Restart \& Clear
+Output'してから下の2つのセルを評価して見てください。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+          \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{時速を秒速に変換するには}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+m+mi}{3} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{倍して}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+m+mi}{10} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{で割ればほぼ一致します。}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{main}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    これを避けるには、mainではなく、別の名前mymainとかにするといいみたいです。
+
+とりあえず、この環境ではmainが特に必要な場合になってから考えよう。
+
+    問題
+整数44を変数\(m\)に代入し、式\(m + 33\)の結果を\(n\)に代入するプログラムを作成せよ。
+
+変数がMathJaxの\(LaTex\)で表示されました。\texttt{\$}で囲むだけです。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{k+kt}{int} \PY{n}{m}\PY{p}{,} \PY{n}{n04}\PY{p}{;}
+        \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{44}\PY{p}{;}
+        \PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{m = }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{m} \PY{p}{;}
+        \PY{n}{n04} \PY{o}{=} \PY{n}{m} \PY{o}{+} \PY{l+m+mi}{33}\PY{p}{;}
+        \PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ and n = }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{n04} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    ちょっとコツがつかめてきたみたい。\\
+この調子で少し進めよう。\\
+なんとなく、C++はJupyterには向かない気もするが。
+
+\subsubsection{ラムダ計算の例}\label{ux30e9ux30e0ux30c0ux8a08ux7b97ux306eux4f8b}
+
+うまく行かないので、とりあえずコメントアウト
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{// int x01 = [](int a , int b) \PYZhy{}\PYZgt{} int \PYZob{} return a + b;\PYZcb{} (2,4)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{// auto func = [](int a, int b) \PYZhy{}\PYZgt{} int \PYZob{} return a+b; \PYZcb{};}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{// func(2,3)}
+\end{Verbatim}
+
+
+    ラムダ計算はうまく行きません。
+
+次に別ファイルにプログラムを書いて読み込むのをやってみます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{p}{.}\PY{n}{L} \PY{p}{.}\PY{o}{/}\PY{n}{mycpp}\PY{o}{/}\PY{n}{func}\PY{p}{.}\PY{n}{cpp}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{test}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+//func.cpp
+#include <iostream>
+using namespace std;
+void test() {
+    cout << "just a test" << endl;
+}
+    というテキストファイルを別途作りました。\\
+ちゃんと"just a test"と表示されます。\\
+ということは、関数定義は別ファイルということか。 これは使えるね。
+
+    問題\\
+3 + 4 を計算すると 7 になります。と表示する関数show3+4()を作れ。
+
+    \begin{verbatim}
+// show3+4.cpp
+#include <iostream>
+using namespace std;
+void show3and4() {
+    cout << 3 << " + " << 4 << " を計算すると " << 7 << " になります。" << endl;
+}
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{p}{.}\PY{n}{L} \PY{p}{.}\PY{o}{/}\PY{n}{mycpp}\PY{o}{/}\PY{n}{show3}\PY{o}{+}\PY{l+m+mf}{4.}\PY{n}{cpp}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{show3and4}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    えっと、関数名のなかに\texttt{+}はゆるされていませんでした。\\
+ファイル名は大丈夫だったけど管理上一致しないのはわかりにくい。\\
+関数なので命令ではないので\texttt{(\ )}が必要です。忘れがち。
+
+問題 初期化していないint変数 uninitialized
+なにが入っているか示すプログラムを作れ。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{// uninitialized.cpp}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k+kt}{void} \PY{n+nf}{uninitialized}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{k+kt}{int} \PY{n}{uninitialized}\PY{p}{;}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ uninitialized: }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{uninitialized} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ でした。 }\PY{l+s}{\PYZdq{}}  \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{p}{.}\PY{n}{L} \PY{p}{.}\PY{o}{/}\PY{n}{mycpp}\PY{o}{/}\PY{n}{uninitialized}\PY{p}{.}\PY{n}{cpp}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{uninitialized}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    げっ！
+セルで評価した結果の関数は32760になって、別ファイルから読み込んだ関数の結果が32682になった。\\
+なぜだ。不思議です。
+
+問題\\
+入力演算子\texttt{\textgreater{}\textgreater{}}を用いて型について考えよう。
+
+\texttt{std:cin\ \textgreater{}\textgreater{}\ n}
+とか書くのですが、Jupyter上ではうまく使えない。\\
+関数化して明示的に引数を渡すしかないと思うがどうか。\\
+あとで考えよう。
+
+問題\\
+1/2と1/2.0を表示して考察する。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mf}{2.0}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+    定数とか変数とか
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{const} \PY{k+kt}{int} \PY{n}{MAXINT} \PY{o}{=} \PY{l+m+mi}{988097l}\PY{p}{;}
+        \PY{k+kt}{char} \PY{n}{a} \PY{o}{=} \PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{A}\PY{l+s+sc}{\PYZsq{}}\PY{p}{;}
+        \PY{n}{a}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cm}{/* これはエラーになる}
+        \PY{c+cm}{char* p = \PYZdq{}C++\PYZdq{};}
+        \PY{c+cm}{p;}
+        \PY{c+cm}{*/}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{float} \PY{n}{testAverage}\PY{p}{;}
+        \PY{k+kt}{bool} \PY{n}{flag} \PY{o}{=} \PY{n+nb}{false}\PY{p}{;}
+        \PY{n}{flag}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{false}\PY{p}{;}
+\end{Verbatim}
+
+
+    true とか falseが返されます。0か1だと思っていたのですが。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+m+mo}{010001}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+m+mh}{0xff}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+m+mf}{1.2e15}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+m+mi}{0}\PY{n}{b101010}
+\end{Verbatim}
+
+
+    2進数とかについて、整理すると
+
+\begin{verbatim}
+2進数は `0b` で始まる。
+8進数は `0` で始まる。
+16進数は `0x` で始まる
+\end{verbatim}
+
+です。
+
+    \paragraph{C++のキーワード}\label{cux306eux30adux30fcux30efux30fcux30c9}
+
+and and\_eq asm auto bitand bitor bool break case catch char class compl
+const const\_cast continue default delete do double dynamic\_cast else
+enum explict export extern dfalse float for friend goto if inline int
+long mutable namespace new not not\_eq operator or or\_eq private
+protected public register reinterpret\_cast return short signed sizeof
+static static\_cast struct switch template this throw true try typedef
+typeid typename using union unsigned virtual void volatile wchar\_t
+while xor xor\_eq
+
+    \paragraph{識別子の形}\label{ux8b58ux5225ux5b50ux306eux5f62}
+
+\begin{verbatim}
+クラス名: 大文字で始まる -> TextEditor, ErrorDialog
+メンバ関数名: 小文字で始まる -> addFirst(), hasNext()
+メンバ変数名: 小文字で始まる -> daysOfWeek, summerVacation 
+定数: 全て大文字 -> PI, DAY_OF_MONTH
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{k+kt}{bool} \PY{n}{flag} \PY{o}{=} \PY{n+nb}{true}\PY{p}{;}
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{flag = }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{flag} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    この場合はtrueでなく、\texttt{1}が返されます。なぜだろう。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{k+kt}{int}\PY{p}{(}\PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{A}\PY{l+s+sc}{\PYZsq{}}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{int}\PY{p}{(}\PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{A}\PY{l+s+sc}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \texttt{int(\textquotesingle{}A\textquotesingle{})}は65なのですね。
+
+    割り算と冪乗
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+m+mi}{10} \PY{o}{/} \PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+    10 / 3 は3を返します。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+m+mi}{10} \PY{o}{\PYZpc{}} \PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+    10 \% 3 は1を返します。余りです。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}cmath\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{n}{pow}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    8.000000 を返します。べき乗です。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}cmath\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{n}{log}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)} \PY{o}{/} \PY{n}{log} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    logはlog()ですね。自然対数です。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}cmath\PYZgt{}}
+        \PY{n}{log}\PY{p}{(}\PY{n}{exp}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    これは 1.0000000 を返します。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+m+mi}{0}\PY{n}{b1101}
+\end{Verbatim}
+
+
+    列挙型
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{enum} \PY{n}{sex} \PY{p}{\PYZob{}}\PY{n}{female}\PY{p}{,} \PY{n}{male}\PY{p}{\PYZcb{}}\PY{p}{;} \PY{c+c1}{// 性別}
+        \PY{k}{enum} \PY{n}{day} \PY{p}{\PYZob{}}\PY{n}{sun}\PY{p}{,} \PY{n}{mon}\PY{p}{,} \PY{n}{tue}\PY{p}{,} \PY{n}{wed}\PY{p}{,} \PY{n}{thu}\PY{p}{,} \PY{n}{fri}\PY{p}{,} \PY{n}{sat}\PY{p}{\PYZcb{}}\PY{p}{;} \PY{c+c1}{// 曜日}
+        \PY{k}{enum} \PY{n}{radix} \PY{p}{\PYZob{}}\PY{n}{bin}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{oct}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{dec}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{hex}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{\PYZcb{}}\PY{p}{;}   \PY{c+c1}{// 進数}
+        \PY{k}{enum} \PY{n}{color} \PY{p}{\PYZob{}}\PY{n}{red}\PY{p}{,}\PY{n}{orange}\PY{p}{,} \PY{n}{yellow}\PY{p}{,} \PY{n}{green}\PY{p}{,} \PY{n}{blue}\PY{p}{,} \PY{n}{violet}\PY{p}{\PYZcb{}}\PY{p}{;} \PY{c+c1}{// 色}
+        \PY{k}{enum} \PY{n}{rank} \PY{p}{\PYZob{}}\PY{n}{ten}\PY{p}{,}\PY{n}{jack}\PY{p}{,} \PY{n}{queen}\PY{p}{,} \PY{n}{king}\PY{p}{,} \PY{n}{ace}\PY{p}{\PYZcb{}}\PY{p}{;} \PY{c+c1}{//  カード}
+        \PY{k}{enum} \PY{n}{suit} \PY{p}{\PYZob{}}\PY{n}{clubs}\PY{p}{,} \PY{n}{diamonds}\PY{p}{,} \PY{n}{hearts}\PY{p}{,} \PY{n}{spades}\PY{p}{\PYZcb{}}\PY{p}{;} \PY{c+c1}{// カードの組}
+        \PY{k}{enum} \PY{n}{roman} \PY{p}{\PYZob{}}\PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{v} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{l} \PY{o}{=} \PY{l+m+mi}{50}\PY{p}{,} \PY{n}{c} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{d} \PY{o}{=} \PY{l+m+mi}{500}\PY{p}{,} \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{1000}\PY{p}{\PYZcb{}}\PY{p}{;} \PY{c+c1}{// 数字}
+\end{Verbatim}
+
+
+    列挙型のリストは読みやすくなるが、中で指定された文字が他の目的に使えなくなってしまいます。
+
+    配列
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{int} \PY{n}{prime}\PY{p}{[}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{\PYZcb{}}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{prime}\PY{p}{;}
+\end{Verbatim}
+
+
+    上のは\{ 2, 3, 5, 7, 11, 13, 17 \}が表示されます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{prime}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{;}
+\end{Verbatim}
+
+
+    これは 7 が表示されます。
+
+    \subsubsection{文字型配列(C-strings)}\label{ux6587ux5b57ux578bux914dux5217c-strings}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{char} \PY{n}{str}\PY{p}{[}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}} \PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{A}\PY{l+s+sc}{\PYZsq{}}\PY{p}{,}\PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{N}\PY{l+s+sc}{\PYZsq{}}\PY{p}{,}\PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{S}\PY{l+s+sc}{\PYZsq{}}\PY{p}{,}\PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{\PYZbs{}0}\PY{l+s+sc}{\PYZsq{}} \PY{p}{\PYZcb{}}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{str}\PY{p}{;}
+\end{Verbatim}
+
+
+    (char {[}4{]}) "ANS"と表示されます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{char} \PY{n}{str2}\PY{p}{[}\PY{p}{]} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Yamada}\PY{l+s}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{str2}\PY{p}{;}
+\end{Verbatim}
+
+
+    (char {[}7{]}) "Yamada"と表示されます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}string\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{n}{string} \PY{n}{str3}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Taro}\PY{l+s}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{str3}\PY{p}{;}
+\end{Verbatim}
+
+
+    これは\texttt{(std::string\ \&)\ "Taro"}と表示されました。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{str3}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{;}
+\end{Verbatim}
+
+
+    これは\texttt{(char)\ \textquotesingle{}a\textquotesingle{}}と表示されました。\texttt{string}と配列の違いがわかりません。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{k+kt}{char} \PY{n}{str}\PY{p}{[}\PY{p}{]} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Taro}\PY{l+s}{\PYZdq{}}\PY{p}{;}
+        \PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{str} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    Taro と出力されます。
+
+ヘッダファイル \texttt{\textless{}cstring\textgreater{}} には、strlen(),
+strcpy(), strncpy(), strcat(), strncat(), strcmp(),
+strncmp()などがある。
+
+\subsubsection{文字列の格納}\label{ux6587ux5b57ux5217ux306eux683cux7d0d}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{n}{string} \PY{n}{weekDays} \PY{p}{[}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s}{\PYZdq{}}\PY{l+s}{ 日曜 }\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{ 月曜 }\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{ 火曜 }\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{ 水曜 }\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{ 木曜 }\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{ 金曜 }\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{ 土曜 }\PY{l+s}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{;}
+        \PY{n}{string} \PY{n}{s} \PY{o}{=} \PY{n}{weekDays}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{;}
+        \PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{weekDays[2]=}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{s} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ です。}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{;}
+\end{Verbatim}
+
+
+    weekDays{[}2{]}= 火曜 です。\\
+と表示されました。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}string\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{n}{string} \PY{n}{s1} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{東京都江戸川区}\PY{l+s}{\PYZdq{}}\PY{p}{;}
+        \PY{n}{string} \PY{n+nf}{s2}\PY{p}{(}\PY{l+m+mi}{60}\PY{p}{,}\PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{*}\PY{l+s+sc}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{string} \PY{n}{s3} \PY{o}{=} \PY{n}{s2}\PY{p}{;}
+        \PY{n}{string} \PY{n+nf}{s4}\PY{p}{(}\PY{n}{s1}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}
+        \PY{n}{string} \PY{n}{s5}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{s4}
+\end{Verbatim}
+
+
+    これは(std::string \&) "��"と出力されました。 文字化けします。
+
+    s1は7個の文字\\
+s2は60個のアスタリスク\\
+s3は60個のアスタリスク\\
+s4は2文字\\
+s5は""
+
+    次はshort intとintの違いの実験です。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{k+kt}{short} \PY{k+kt}{int} \PY{n}{i}\PY{p}{;}
+        \PY{k+kt}{int} \PY{n}{j}\PY{p}{;}
+        \PY{n}{j} \PY{o}{=} \PY{l+m+mi}{60000}\PY{p}{;}
+        \PY{n}{i} \PY{o}{=} \PY{n}{j}\PY{p}{;}
+        \PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{i} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{   }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{j} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    -5536 60000 と表示されました。
+
+プログラム名と関数名を同じにすると\texttt{.x}というメタコマンドで実行できます。
+
+    \begin{verbatim}
+/shortint.cpp
+# include <iostream>
+using namespace std;
+int shortint ()
+{
+    short int i;
+    int j;
+    j = 60000;
+    i = j;
+    cout << i << "   " << j << endl;
+    return 0;
+}
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{p}{.}\PY{n}{x} \PY{p}{.}\PY{o}{/}\PY{n}{mycpp}\PY{o}{/}\PY{n}{shortint}\PY{p}{.}\PY{n}{cpp}
+\end{Verbatim}
+
+
+    -5536 60000 と表示されました。
+
+しかし、これはセルでも作れるのではないか。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{ include \PYZlt{}iostream\PYZgt{}}
+        \PY{k+kt}{int} \PY{n+nf}{shortint} \PY{p}{(}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+            \PY{k+kt}{short} \PY{k+kt}{int} \PY{n}{i}\PY{p}{;}
+            \PY{k+kt}{int} \PY{n}{j}\PY{p}{;}
+            \PY{n}{j} \PY{o}{=} \PY{l+m+mi}{60000}\PY{p}{;}
+            \PY{n}{i} \PY{o}{=} \PY{n}{j}\PY{p}{;}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{i} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{   }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{j} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{shortint}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    -5536 60000\\
+と表示されました。
+問題ないみたいですが、\texttt{using\ namespace\ std}を入れると、ここでは関数は定義できません、\texttt{function\ definition\ is\ not\ allowed\ here}というエラーになります。
+
+次はforループの実験です。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{k+kt}{char} \PY{n}{letter}\PY{p}{;}
+        \PY{k}{for}\PY{p}{(}\PY{n}{letter} \PY{o}{=} \PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{A}\PY{l+s+sc}{\PYZsq{}}\PY{p}{;} \PY{n}{letter} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{z}\PY{l+s+sc}{\PYZsq{}}\PY{p}{;} \PY{n}{letter}\PY{o}{+}\PY{o}{+}\PY{p}{)}
+            \PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{letter}\PY{p}{;}
+\end{Verbatim}
+
+
+    \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ{[}\textbackslash{}{]}\^{}\_\textasciigrave{}abcdefghijklmnopqrstuvwxyz}
+と表示されました。
+
+もっと範囲を広げてみよう。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{k+kt}{char} \PY{n}{letter}\PY{p}{;}
+        \PY{k}{for}\PY{p}{(}\PY{n}{letter} \PY{o}{=} \PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{!}\PY{l+s+sc}{\PYZsq{}}\PY{p}{;} \PY{n}{letter} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{\PYZti{}}\PY{l+s+sc}{\PYZsq{}}\PY{p}{;} \PY{n}{letter}\PY{o}{+}\PY{o}{+}\PY{p}{)}
+            \PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{letter}\PY{p}{;}
+\end{Verbatim}
+
+
+    \texttt{!"\#\$\%\&\textquotesingle{}()*+,-./0123456789:;\textless{}=\textgreater{}?@ABCDEFGHIJKLMNOPQRSTUVWXYZ{[}\textbackslash{}{]}\^{}\_\textasciigrave{}abcdefghijklmnopqrstuvwxyz\{\textbar{}\}\textasciitilde{}}
+
+と表示されました。\\
+いくつあるのだろう。
+
+そういえば、ここでiPythonのマジックコマンドは使えないか。
+-\textgreater{} 使えません。
+
+関係ないかもしれないけど、こんなのを見つけました。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}vector\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{k}{auto} \PY{n}{v} \PY{o}{=} \PY{n}{vector}\PY{o}{\PYZlt{}}\PY{k+kt}{int}\PY{o}{\PYZgt{}}\PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{template} \PY{o}{\PYZlt{}}\PY{k}{class} \PY{n+nc}{Vector}\PY{o}{\PYZgt{}}
+        \PY{k+kt}{void} \PY{n}{print\PYZus{}elements}\PY{p}{(}\PY{n}{Vector} \PY{n}{v}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{k}{for} \PY{p}{(}\PY{k}{auto}\PY{o}{\PYZam{}} \PY{n+nl}{a}\PY{p}{:} \PY{n}{v}\PY{p}{)} \PY{p}{\PYZob{}}
+                \PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{a} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{endl}\PY{p}{;}
+            \PY{p}{\PYZcb{}}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{print\PYZus{}elements}\PY{p}{(}\PY{n}{v}\PY{p}{)}
+\end{Verbatim}
+
+
+    わう！
+
+\begin{verbatim}
+1
+2
+3
+4
+5
+\end{verbatim}
+
+と表示されています。
+
+\texttt{template}ってなに。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}vector\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{k}{auto} \PY{n}{v2} \PY{o}{=} \PY{n}{vector}\PY{o}{\PYZlt{}}\PY{k+kt}{char}\PY{o}{\PYZgt{}}\PY{p}{\PYZob{}}\PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{a}\PY{l+s+sc}{\PYZsq{}}\PY{p}{,}\PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{b}\PY{l+s+sc}{\PYZsq{}}\PY{p}{,}\PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{c}\PY{l+s+sc}{\PYZsq{}}\PY{p}{,}\PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{d}\PY{l+s+sc}{\PYZsq{}}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{print\PYZus{}elements}\PY{p}{(}\PY{n}{v2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \texttt{a\ b\ c\ d} と表示されました。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{template} \PY{o}{\PYZlt{}}\PY{k}{typename} \PY{n}{T}\PY{o}{\PYZgt{}}
+        \PY{n}{T} \PY{n}{mymax}\PY{p}{(}\PY{n}{T} \PY{n}{x}\PY{p}{,} \PY{n}{T} \PY{n}{y}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+            \PY{k}{if} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZlt{}} \PY{n}{y}\PY{p}{)}
+                \PY{k}{return} \PY{n}{y}\PY{p}{;}
+            \PY{k}{else}
+                \PY{k}{return} \PY{n}{x}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{mymax}\PY{p}{(}\PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{X}\PY{l+s+sc}{\PYZsq{}}\PY{p}{,} \PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{A}\PY{l+s+sc}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \texttt{\textquotesingle{}X\textquotesingle{}}と表示されました。
+
+もうひとつネットにあった例から。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{} // templateと同じセルに書くとうまく行かない}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;} \PY{c+c1}{// templateと同じセルに書くとうまく行かない}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{template} \PY{o}{\PYZlt{}}\PY{k}{class} \PY{n+nc}{X}\PY{o}{\PYZgt{}} 
+        \PY{k+kt}{void} \PY{n}{println}\PY{p}{(}\PY{n}{X} \PY{n}{out}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{out} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{\PYZbs{}n}\PY{l+s+sc}{\PYZsq{}}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{println}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{はろー、はろー}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{println}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{;}
+        \PY{n}{println}\PY{p}{(}\PY{l+m+mf}{1.052}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{verbatim}
+はろー、はろー
+10
+1.052
+\end{verbatim}
+
+と表示されました。うまく行っているみたい。
+
+templateの中身はなんでもいいのだろうか。\\
+使わなくてもいいのだろうか。\\
+実験。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{} // templateと同じセルに書くとうまく行かない}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;} \PY{c+c1}{// templateと同じセルに書くとうまく行かない}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{template} \PY{o}{\PYZlt{}}\PY{k}{typename} \PY{n}{T}\PY{o}{\PYZgt{}}
+        \PY{k+kt}{void} \PY{n}{testTemplate}\PY{p}{(}\PY{n}{T} \PY{n}{x}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{templateの実験だよ。}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{endl}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{testTemplate}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    "templateの実験だよ。"と表示されました。\\
+カッコ\texttt{()}の中をブランクにするとエラーになります。
+
+namespaceを使わないと、次のようにひとつのファイルに書いても動く。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{} }
+        \PY{k}{template} \PY{o}{\PYZlt{}}\PY{k}{typename} \PY{n}{T}\PY{o}{\PYZgt{}}
+        \PY{k+kt}{void} \PY{n}{testTemplate}\PY{p}{(}\PY{n}{T} \PY{n}{x}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{templateの実験だよ。}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{testTemplate}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    templateの実験だよ。と表示されます。 とりあえずしばらくこれで行くか。
+
+ネットを調べたら、引数がなくても関数が機能するための、パラメーターパックという書き方があるみたい。\\
+ちょっと使ってみる。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{} }
+        \PY{k}{template} \PY{o}{\PYZlt{}}\PY{k}{typename} \PY{p}{.}\PY{p}{.}\PY{p}{.}\PY{n}{T}\PY{o}{\PYZgt{}}
+        \PY{k+kt}{int} \PY{n}{testTemplate}\PY{p}{(}\PY{k+kt}{void}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{templateの実験だよ。}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{testTemplate}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    templateの実験だよ。と表示されました。\\
+これって、すごく普通のmain.cppに近いかたちですよね。\texttt{()}と書くところを\texttt{(void)}と書くのと、templateが付いていることだけ違っている。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{} }
+        \PY{k}{template} \PY{o}{\PYZlt{}}\PY{k}{typename} \PY{p}{.}\PY{p}{.}\PY{p}{.}\PY{n}{T}\PY{o}{\PYZgt{}}
+        \PY{k+kt}{int} \PY{n}{testTemplate}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{templateの実験だよ。}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{testTemplate}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{コメントについて}\label{ux30b3ux30e1ux30f3ux30c8ux306bux3064ux3044ux3066}
+
+\begin{verbatim}
+// が行コメント  
+/* ... */ がブロックコメント  
+\end{verbatim}
+
+ですが実験です。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{*/}\PY{l+s}{\PYZdq{}}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{/*}\PY{l+s}{\PYZdq{}}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{c+cm}{/* \PYZdq{}*/}\PY{l+s}{\PYZdq{}}\PY{l+s}{ */;}
+\end{Verbatim}
+
+
+    このセルは評価するとエラーになります。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{c+cm}{/*  \PYZdq{}*/}\PY{l+s}{\PYZdq{}}\PY{l+s}{ /* }\PY{l+s}{\PYZdq{}}\PY{c+cm}{/*\PYZdq{}  */}\PY{p}{;}
+\end{Verbatim}
+
+
+    これはエラーになりません。
+
+これからしばらく"C++ Primer, Fifth
+Edition"という本からプログラム例を引用します。\\
+この本の例は多くはmainで書かれているのですがここではセルで評価しやすいように、mainの中身だけを書きます。
+
+まずは\texttt{while}の例。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{k+kt}{int} \PY{n}{sum} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{val}  \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{;}
+        \PY{c+c1}{// 変数valの値が10以下になるまでsumに足す}
+        \PY{k}{while} \PY{p}{(}\PY{n}{val} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}  \PY{p}{\PYZob{}}
+            \PY{n}{sum} \PY{o}{+}\PY{o}{=} \PY{n}{val}\PY{p}{;}   \PY{c+c1}{// sum + val をsumに入れる}
+            \PY{o}{+}\PY{o}{+}\PY{n}{val}\PY{p}{;}        \PY{c+c1}{// val を1増やす}
+        \PY{p}{\PYZcb{}}
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{1から10までの合計は }\PY{l+s}{\PYZdq{}}
+                  \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{sum} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ です。}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    上のセルは\texttt{using\ namespace\ std;}がないとエラーになりました。\\
+よくわからない。
+
+次は\texttt{for}の例です。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{k+kt}{int} \PY{n}{sum} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{c+c1}{// sum values from 1 through 10 inclusive}
+        \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{val} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{;} \PY{n}{val} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{10}\PY{p}{;} \PY{o}{+}\PY{o}{+}\PY{n}{val}\PY{p}{)}
+            \PY{n}{sum} \PY{o}{+}\PY{o}{=} \PY{n}{val}\PY{p}{;}  \PY{c+c1}{// equivalent to sum = sum + val}
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{Sum of 1 to 10 inclusive is }\PY{l+s}{\PYZdq{}}
+                  \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{sum} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{verbatim}
+//sum01.cpp
+#include <iostream>
+int main()
+{
+    int sum = 0, value = 0;
+    // read until end-of-file, calculating a running total of all values read
+    while (std::cin >> value)
+        sum += value; // equivalent to sum = sum + value
+    std::cout << "Sum is: " << sum << std::endl;
+    return 0;
+}
+\end{verbatim}
+
+このプログラムをコンパイルして、
+
+g++ sum01.cpp -o sum01
+
+じっこうすると、
+
+./sum01
+
+13 27 Ctrl-d
+
+sum is: 40
+
+となりました。Ctrl-dでなくても数字以外のものをいれれば終了して合計を出します。\\
+Ctrl-cだとプログラム自体がしゅうりょうしてしまい、合計は出力されません。\\
+LinuxでCtrl-dはEnd-of-Fileの意味だそうで、WindowsではこれがCtrl-zだそうです。
+
+テキストの次のプログラムが、
+
+42 42 42 42 42 55 55 62 100 100 100
+
+というインプットで、
+
+42 occurs 5 times\\
+55 occurs 2 times\\
+62 occurs 1 times\\
+100 occurs 3 times
+
+というアウトプットになるプログラムで、こういうのをmainの中の入出力でやるのがイヤになってきたので、なんとか関数にしたい。\\
+しかし、配列とかまだぜんぜんわからないのでどうしたらよいか。
+
+ネットでつぎのような関数のプログラムを見つけました。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{// avarage}
+        \PY{k}{template} \PY{o}{\PYZlt{}}\PY{k}{typename} \PY{n}{T}\PY{o}{\PYZgt{}}
+        \PY{n}{T} \PY{n}{Average}\PY{p}{(}\PY{n}{T} \PY{o}{*}\PY{n}{atArray}\PY{p}{,} \PY{k+kt}{int} \PY{n}{nNumValues}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+            \PY{n}{T} \PY{n}{tSum} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;}
+            \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{nCount}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{;} \PY{n}{nCount} \PY{o}{\PYZlt{}} \PY{n}{nNumValues}\PY{p}{;} \PY{n}{nCount}\PY{o}{+}\PY{o}{+}\PY{p}{)}
+                \PY{n}{tSum} \PY{o}{+}\PY{o}{=} \PY{n}{atArray}\PY{p}{[}\PY{n}{nCount}\PY{p}{]}\PY{p}{;}
+        
+            \PY{n}{tSum} \PY{o}{/}\PY{o}{=} \PY{n}{nNumValues}\PY{p}{;}
+            \PY{k}{return} \PY{n}{tSum}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{int} \PY{n}{a}\PY{p}{[}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{23}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{\PYZcb{}}\PY{p}{;}
+        \PY{n}{Average}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    これを改造して、
+
+int a{[}{]}=\{42 42 42 42 42 55 55 62 100 100 100\};\\
+countConsecutive(a, 11)
+
+としたら目的の同じ数字をカウントするような、関数countConsecutive()を作ろう。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{// countConsecutive()}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{template} \PY{o}{\PYZlt{}}\PY{k}{typename} \PY{n}{T}\PY{o}{\PYZgt{}}
+        \PY{n}{T} \PY{n}{countConsecutive}\PY{p}{(}\PY{n}{T} \PY{o}{*}\PY{n}{atArray}\PY{p}{,} \PY{k+kt}{int} \PY{n}{nNumValue}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{c+c1}{// 数える値がcurrVal、新たな値はvalに入れる}
+        \PY{k+kt}{int} \PY{n}{currVal} \PY{o}{=} \PY{n}{atArray}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{val} \PY{o}{=} \PY{n}{atArray}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{;}
+        \PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cnt} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{;} \PY{c+c1}{// 配列の位置がiで、cntに数える値の数を入れる}
+        \PY{k}{while} \PY{p}{(}\PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{nNumValue}\PY{p}{)} \PY{p}{\PYZob{}} \PY{c+c1}{// 配列のある限り実行する}
+            \PY{n}{val} \PY{o}{=} \PY{n}{atArray}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{;}
+            \PY{k}{if} \PY{p}{(}\PY{n}{val} \PY{o}{=}\PY{o}{=} \PY{n}{currVal}\PY{p}{)}   \PY{c+c1}{//  もしvalの値とcurrValの値が同じならば}
+                \PY{o}{+}\PY{o}{+}\PY{n}{cnt}\PY{p}{;}            \PY{c+c1}{// cntの値を増やす}
+            \PY{k}{else} \PY{p}{\PYZob{}} \PY{c+c1}{// 違ったところでそれまでの値と数を出力する}
+                \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{currVal} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ occurs }\PY{l+s}{\PYZdq{}}
+                          \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{cnt} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ times}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+                \PY{n}{currVal} \PY{o}{=} \PY{n}{val}\PY{p}{;}    \PY{c+c1}{// remember the new value}
+                \PY{n}{cnt} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{;}          \PY{c+c1}{// reset the counter}
+            \PY{p}{\PYZcb{}}
+            \PY{o}{+}\PY{o}{+}\PY{n}{i}\PY{p}{;}
+        \PY{p}{\PYZcb{}}  \PY{c+c1}{// while loop ends here}
+        \PY{c+c1}{// remember to print the count for the last value in the file}
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{currVal} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}}  \PY{l+s}{\PYZdq{}}\PY{l+s}{ occurs }\PY{l+s}{\PYZdq{}}
+                  \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{cnt} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ times}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+        \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{int} \PY{n}{a}\PY{p}{[}\PY{p}{]}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+m+mi}{42}\PY{p}{,} \PY{l+m+mi}{42}\PY{p}{,} \PY{l+m+mi}{42}\PY{p}{,} \PY{l+m+mi}{42}\PY{p}{,} \PY{l+m+mi}{42}\PY{p}{,} \PY{l+m+mi}{55}\PY{p}{,} \PY{l+m+mi}{55}\PY{p}{,} \PY{l+m+mi}{62}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{\PYZcb{}}\PY{p}{;}
+        \PY{n}{countConsecutive}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}
+\end{Verbatim}
+
+
+    できた！！\\
+同じ結果になりました。\\
+問題ないと思います。
+
+\subsubsection{クラス}\label{ux30afux30e9ux30b9}
+
+C++ではデータ構造をクラスを定義する、という形で行います。\\
+クラスは型を定義し、その型に関する操作(operation)を定義します。
+
+このテキストでは本屋プログラムを作成します。
+
+クラスを使うには3つのことを知る必要があります。
+
+\begin{itemize}
+\tightlist
+\item
+  クラスの名前
+\item
+  どこで定義されているか
+\item
+  そのクラスはどのような操作ができるのか
+\end{itemize}
+
+本屋プログラムのクラス名は
+Sales\_itemで、すでにSales\_item.hというヘッダーに定義されているものとします。
+
+Sales\_itemクラスのもう的は売上金額集計、売上冊数、本一冊当たりの平均価格です。
+
+情報がどのように蓄えられるかはどうでもいいです。\\
+クラスを使うにはどのように実装されたかは考えません。
+われわれが必要なのはそのタイプのオブジェクトにどんな操作ができるかを知ることです。
+
+すべてのクラスは型を定義します。\\
+方の名前はクラスの名前と同じです。
+Sales\_itemクラスはSales\_itemという型を定義します。
+そして、既存の型とどうように変数の型を定義することができます。
+
+Sales\_item item;
+
+と書けば、itemがSales\_item型のオブジェクトだ、と言っていることになります。
+
+Sales\_item型の変数について、できることは
+
+\begin{itemize}
+\tightlist
+\item
+  isbnという関数でそのSales\_itemのISBNを取り出す
+\item
+  input(\textgreater{}\textgreater{})とoutput(\textless{}\textless{})という演算子を使ってSales\_itemにreadとwrite操作をする
+\item
+  add(+)という演算子をつかって2つのSales\_itemオブジェクトをくわえる。
+\end{itemize}
+
+これは、2つ同じISBNである必要がありますが、足した結果のSales\_itemオブジェクトはもとのSales\_itemの売上冊数と売上金額の合計になります。
+
+\begin{itemize}
+\tightlist
+\item
+  代入演算子(+=)を使ってSales\_itemオブジェクトをたのSales\_itemオブジェクトに足すことができる。
+\end{itemize}
+
+Sales\_itemクラスを作る人はそのオブジェクトが作られる時の挙動、代入時の挙動、足し算、インプット、アウトプットの挙動などすべてのアクションをプログラムする必要があります。
+
+一般的なクラスについては上記以外の挙動もすべて定義されますが、今回Sales\_itemについては上記の操作に限定することにしましょう。
+
+\paragraph{Sales\_item
+sの読み込み(reading)と書き込み(writing)}\label{sales_item-sux306eux8aadux307fux8fbcux307freadingux3068ux66f8ux304dux8fbcux307fwriting}
+
+この時点で仮おきのプログラムです。このままでは評価(実行)しないでください。
+
+    \begin{verbatim}
+# include <iostream>
+# include "Sales_item.h"
+int main()
+{
+    Sales_item book;
+    // ISBNと売上冊数、価格が読み込まれる
+    std::cin >> book;
+    // ISBNと売上冊数、総売上、平均価格が出力される
+    std::cout << book << std::endl;
+    return 0;
+}
+// input 
+// 0-201-70353-X 4 24.99
+// output
+// 0-201-70353-X 4 99.96 24.99
+// 意味はある本が24.99ドルで4冊売れた。と書き込まれて、読みだすとある本が4冊売れて、売上総額は99.96ドルで平均価格は24.99ドル、というもの。
+\end{verbatim}
+
+    \texttt{\#\ include}で標準ライブラリーから読み込まれるヘッダーは山カッコ\texttt{\textless{}\textgreater{}}で囲まれます。\\
+ライブラリー以外から読み込まれるものは引用符\texttt{""}で囲まれます。
+
+アイデア\\
+標準入力からの入力のところ\texttt{std:cin\ \textgreater{}\textgreater{}}をファイルからの入力に変えたらそのままつかえるかもしれない。\\
+やってみよう。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}fstream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}string\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZdq{}./mycpp/Sales\PYZus{}item.h\PYZdq{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{template} \PY{o}{\PYZlt{}}\PY{k}{typename} \PY{p}{.}\PY{p}{.}\PY{p}{.}\PY{n}{T}\PY{o}{\PYZgt{}}
+        \PY{k+kt}{int} \PY{n}{mymain}\PY{p}{(}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+            \PY{n}{Sales\PYZus{}item} \PY{n}{book}\PY{p}{;}
+            \PY{n}{ifstream} \PY{n+nf}{ifs}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{./mycpp/data\PYZus{}book\PYZus{}input01.txt}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{ifs} \PY{o}{\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{book}\PY{p}{;}
+            \PY{c+c1}{// ISBNと売上冊数、総売上、平均価格が出力される}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{book} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{mymain}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    できた！！ \texttt{0-201-70353-X\ 4\ 99.96\ 24.99}と表示されます。
+
+整理すると、ふつうのC++の教科書はスタンドアローンのプログラムでmainがあって標準入力からデータを入力するものが多い。\\
+それをJupyter notebook上でやるときの変更点。 1. \#includeの行とusing
+namespace
+std;の行は本体と別のセルにして、本体のセルを評価する前に評価する 1.
+本体はtemplate \texttt{\textless{}typename\ ...T\textgreater{}}
+\texttt{int\ mymain()\ \{\}}とする 1.
+\texttt{cin\ \textgreater{}\textgreater{}}がある場合は、データを別途用意し、\texttt{ifstream\ is("data.txt")}
+\texttt{ifs\ \textgreater{}\textgreater{}}とする
+
+以上
+
+次に2つの売上を足すプログラムです。\\
+同じようにやってみます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}fstream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}string\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZdq{}./mycpp/Sales\PYZus{}item.h\PYZdq{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{template} \PY{o}{\PYZlt{}}\PY{k}{typename} \PY{p}{.}\PY{p}{.}\PY{p}{.}\PY{n}{T}\PY{o}{\PYZgt{}}
+        \PY{k+kt}{int} \PY{n}{mymain}\PY{p}{(}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+            \PY{n}{Sales\PYZus{}item} \PY{n}{item1}\PY{p}{,} \PY{n}{item2}\PY{p}{;}
+            \PY{n}{ifstream} \PY{n+nf}{ifs}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{./mycpp/data\PYZus{}book02.txt}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{ifs} \PY{o}{\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{item1} \PY{o}{\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{item2}\PY{p}{;} \PY{c+c1}{// 2つの売上データを読み込む}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{item1} \PY{o}{+} \PY{n}{item2} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{mymain}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \texttt{data\_book02.txt}の内容は
+\texttt{0-201-78345-X\ 3\ 20.00\ 0-201-78345-X\ 2\ 25.00}
+でアウトプットは\texttt{0-201-78345-X\ 5\ 110\ 22}となりました。
+
+\paragraph{メンバー関数}\label{ux30e1ux30f3ux30d0ux30fcux95a2ux6570}
+
+次はメンバー関数の例です。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}fstream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}string\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZdq{}./mycpp/Sales\PYZus{}item.h\PYZdq{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{template} \PY{o}{\PYZlt{}}\PY{k}{typename} \PY{p}{.}\PY{p}{.}\PY{p}{.}\PY{n}{T}\PY{o}{\PYZgt{}}
+        \PY{k+kt}{int} \PY{n}{mymain}\PY{p}{(}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+            \PY{n}{Sales\PYZus{}item} \PY{n}{item1}\PY{p}{,} \PY{n}{item2}\PY{p}{;}
+            \PY{n}{ifstream} \PY{n+nf}{ifs}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{./mycpp/data\PYZus{}book03.txt}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{ifs} \PY{o}{\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{item1} \PY{o}{\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{item2}\PY{p}{;} \PY{c+c1}{// 2つの売上データを読み込む}
+            
+            \PY{c+c1}{// item1とitem2が同じ本かどうかをチェックする}
+            \PY{k}{if} \PY{p}{(}\PY{n}{item1}\PY{p}{.}\PY{n}{isbn}\PY{p}{(}\PY{p}{)} \PY{o}{=}\PY{o}{=} \PY{n}{item2}\PY{p}{.}\PY{n}{isbn}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{p}{\PYZob{}}
+                \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{item1} \PY{o}{+} \PY{n}{item2} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+                \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;} 
+            \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+                \PY{n+nl}{std}\PY{p}{:}\PY{n}{cerr} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{データは同じISBNでなければなりません}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+                \PY{k}{return} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{;} \PY{c+c1}{// 失敗}
+            \PY{p}{\PYZcb{}}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{item1} \PY{o}{+} \PY{n}{item2} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{mymain}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    わざと違うデータを読み込ませたところ"データは同じISBNでなければなりません"と出力されました。
+
+このプログラムで使われている\texttt{isbn()}がメンバー関数です。\\
+メンバー関数はメソッドとも呼ばれます。\\
+クラスについて定義される関数です。
+
+\subsubsection{アイデア}\label{ux30a2ux30a4ux30c7ux30a2}
+
+ここまで来てなんですが、入力をファイルからやるのなら、プログラムが\texttt{main()}である必要がないのではないか。\\
+わざわざ\texttt{mymain()}を起動するだけ面倒ではないか。\\
+せっかくのreplなのだからそのセルで充足するようにjupyter
+notebookはできているのではないか。
+
+たとえば今のプログラムを次のようにする。実験。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}fstream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}string\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZdq{}./mycpp/Sales\PYZus{}item.h\PYZdq{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        
+        \PY{n}{Sales\PYZus{}item} \PY{n}{item1}\PY{p}{,} \PY{n}{item2}\PY{p}{;}
+        \PY{n}{ifstream} \PY{n+nf}{ifs}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{./mycpp/data\PYZus{}book03.txt}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{ifs} \PY{o}{\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{item1} \PY{o}{\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{item2}\PY{p}{;} \PY{c+c1}{// 2つの売上データを読み込む}
+        
+        \PY{c+c1}{// item1とitem2が同じ本かどうかをチェックする}
+        \PY{k}{if} \PY{p}{(}\PY{n}{item1}\PY{p}{.}\PY{n}{isbn}\PY{p}{(}\PY{p}{)} \PY{o}{=}\PY{o}{=} \PY{n}{item2}\PY{p}{.}\PY{n}{isbn}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{item1} \PY{o}{+} \PY{n}{item2} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;} 
+        \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+            \PY{n+nl}{std}\PY{p}{:}\PY{n}{cerr} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{データは同じISBNでなければなりません}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{k}{return} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{;} \PY{c+c1}{// 失敗}
+        \PY{p}{\PYZcb{}}
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{item1} \PY{o}{+} \PY{n}{item2} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    おー！ うまくいきました。あたりまえか。\\
+ということは、テキストのプログラムは、\texttt{int\ main()\{\}}をとって、セルのなかで実行すればよい。
+
+さて、テキスト(C++ Primer, Fifth
+Edition)の方はすこし複雑になってきました。
+
+data\_book\_sales01.txtという入力用ファイルに次のような売上データが入っています。
+
+\begin{verbatim}
+0-201-70353-X 4 24.99
+0-201-82470-1 4 45.39
+0-201-88954-4 2 15.00 
+0-201-88954-4 5 12.00 
+0-201-88954-4 7 12.00 
+0-201-88954-4 2 12.00 
+0-399-82477-1 2 45.39
+0-399-82477-1 3 45.39
+0-201-78345-X 3 20.00
+0-201-78345-X 2 25.00
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}fstream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}string\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZdq{}./mycpp/Sales\PYZus{}item.h\PYZdq{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        
+        \PY{n}{Sales\PYZus{}item} \PY{n}{total}\PY{p}{;}
+        \PY{n}{ifstream} \PY{n+nf}{ifs}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{./mycpp/data\PYZus{}book\PYZus{}sales01.txt}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        
+        \PY{c+c1}{// 最初の取引データを読み込み取引データがあることを確認する}
+        \PY{k}{if} \PY{p}{(}\PY{n}{ifs} \PY{o}{\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{total}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{n}{Sales\PYZus{}item} \PY{n}{trans}\PY{p}{;} \PY{c+c1}{// 取引データの合計を入れる変数}
+            \PY{c+c1}{// 残りのデータを読み込む}
+            \PY{k}{while} \PY{p}{(}\PY{n}{ifs} \PY{o}{\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{trans}\PY{p}{)} \PY{p}{\PYZob{}}
+                \PY{c+c1}{// 同じ本かどうか}
+                \PY{k}{if} \PY{p}{(}\PY{n}{total}\PY{p}{.}\PY{n}{isbn}\PY{p}{(}\PY{p}{)} \PY{o}{=}\PY{o}{=} \PY{n}{trans}\PY{p}{.}\PY{n}{isbn}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{total} \PY{o}{+}\PY{o}{=} \PY{n}{trans}\PY{p}{;} \PY{c+c1}{// 同じなら取引データをupdateする}
+                \PY{k}{else} \PY{p}{\PYZob{}}
+                    \PY{c+c1}{// 本が変わったらそれまでのデータを出力する}
+                    \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{total} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+                    \PY{n}{total} \PY{o}{=} \PY{n}{trans}\PY{p}{;}  \PY{c+c1}{// totalを次の本にする}
+                \PY{p}{\PYZcb{}}
+            \PY{p}{\PYZcb{}}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{total} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;} \PY{c+c1}{// 最後の取引を出力する}
+        \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+            \PY{c+c1}{// データがない場合の警告}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cerr} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{でーたがない?!}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{k}{return} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{;}  \PY{c+c1}{// 失敗}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{verbatim}
+0-201-70353-X 4 99.96 24.99
+0-201-82470-1 4 181.56 45.39
+0-201-88954-4 16 198 12.375
+0-399-82477-1 5 226.95 45.39
+0-201-78345-X 5 110 22
+\end{verbatim}
+
+と出力されました。成功です。
+
+試しにデータのファル名を存在しないファイル名にすると、cerrの内容\texttt{"でーたがない?!"}が表示されました。
+
+入力データがグルーピングされていないとうまく走りませんが、ソートされている風でもないのが不思議です。
+
+ちょっと関係ないけど、signed to
+unsignedの自動変換についての、参考プログラムです。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        
+        \PY{k+kt}{unsigned} \PY{n}{u} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{u2} \PY{o}{=} \PY{l+m+mi}{42}\PY{p}{;}
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{u2} \PY{o}{\PYZhy{}} \PY{n}{u} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;} \PY{c+c1}{// 32}
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{u} \PY{o}{\PYZhy{}} \PY{n}{u2} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;} \PY{c+c1}{// 4294967264}
+        \PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{i2} \PY{o}{=} \PY{l+m+mi}{42}\PY{p}{;}
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{i2} \PY{o}{\PYZhy{}} \PY{n}{i} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;} \PY{c+c1}{// 32}
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{i} \PY{o}{\PYZhy{}} \PY{n}{i2} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;} \PY{c+c1}{// \PYZhy{}32}
+\end{Verbatim}
+
+
+    次のは日本語の実験。stringでもarrayでも行けるのかな。よくわからない。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}string\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        
+        \PY{k+kt}{char} \PY{n}{a}\PY{p}{[}\PY{p}{]}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{これはarray}\PY{l+s}{\PYZdq{}}\PY{p}{;}
+        \PY{n}{string} \PY{n}{mystr}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{これはstring}\PY{l+s}{\PYZdq{}}\PY{p}{;}
+        
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{a} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{,,,}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{mystr} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{Hi }\PY{l+s+se}{\PYZbs{}x4d}\PY{l+s}{O}\PY{l+s+se}{\PYZbs{}115}\PY{l+s}{!}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{;}  \PY{c+c1}{// prints Hi MOM!}
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}x41}\PY{l+s+se}{\PYZbs{}101}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{endl}\PY{p}{;} \PY{c+c1}{// \PYZbs{}x は16進数、\PYZbs{}xxxは8進数でいずれも\PYZsq{}A\PYZsq{}(65)を表す}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{int} \PY{n}{month} \PY{o}{=} \PY{l+m+mi}{9}\PY{p}{,} \PY{n}{day} \PY{o}{=} \PY{l+m+mi}{7}\PY{p}{;}
+        \PY{k+kt}{int} \PY{n}{month2} \PY{o}{=} \PY{l+m+mo}{011}\PY{p}{,} \PY{n}{day2} \PY{o}{=} \PY{l+m+mo}{07}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{month2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s}{\PYZdq{}}\PY{l+s}{who goes with F}\PY{l+s+se}{\PYZbs{}145}\PY{l+s}{rgus?}\PY{l+s+se}{\PYZbs{}012}\PY{l+s+se}{\PYZbs{}012}\PY{l+s}{kkk?}\PY{l+s}{\PYZdq{}}
+\end{Verbatim}
+
+
+    stringの初期化の実験 s1==s2==s3で、ばななばななばななと表示されます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{n}{string} \PY{n}{s1} \PY{p}{\PYZob{}}\PY{l+s}{\PYZdq{}}\PY{l+s}{ばなな}\PY{l+s}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{;}
+        \PY{n}{string} \PY{n}{s2} \PY{o}{=} \PY{n}{string}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ばなな}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;} 
+        \PY{n}{string} \PY{n}{s3} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{ばなな}\PY{l+s}{\PYZdq{}}\PY{p}{;}
+        \PY{k}{if} \PY{p}{(}\PY{n}{s1} \PY{o}{=}\PY{o}{=} \PY{n}{s2} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{s1} \PY{o}{=}\PY{o}{=} \PY{n}{s3}\PY{p}{)}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{s1} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{s2} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{s3} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}fstream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        
+        \PY{n}{ifstream} \PY{n+nf}{ifs}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{./mycpp/somedata.txt}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        
+        \PY{c+c1}{// ifs \PYZgt{}\PYZgt{} int input\PYZus{}value; // エラー}
+        
+        \PY{k+kt}{int} \PY{n}{input\PYZus{}value}\PY{p}{;}
+        \PY{n}{ifs} \PY{o}{\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{input\PYZus{}value}\PY{p}{;}
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{input\PYZus{}value} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{// int i = \PYZob{}3.14\PYZcb{} // error}
+        \PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{3}\PY{p}{\PYZcb{}} \PY{c+c1}{// ok}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{// double salary = wage = 9999.99; // error}
+        \PY{k+kt}{double} \PY{n}{wage} \PY{o}{=} \PY{l+m+mf}{9999.99}\PY{p}{;}
+        \PY{k+kt}{double} \PY{n}{salaray} \PY{o}{=} \PY{n}{wage}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}string\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{n}{string} \PY{n}{global\PYZus{}str}\PY{p}{;}
+        \PY{n}{global\PYZus{}str}\PY{p}{;} \PY{c+c1}{// \PYZdq{}\PYZdq{}が初期値}
+\end{Verbatim}
+
+
+    \texttt{extern}の実験。通常の\texttt{int\ n}と違って、何度でも評価できる。\\
+通常の\texttt{int\ n}とかは定義なので、定義はなんどもできない。\texttt{int\ n\ =\ 1}とかも同じ。\\
+代入\texttt{n\ =\ 3}は何度でもできる。
+見かけは\texttt{=}で似ているが、定義の時に使われているのは初期化であって、代入ではない。
+
+\texttt{extern}は宣言であって、定義ではないので、以下のコードは何度でも評価できる。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{extern} \PY{k+kt}{int} \PY{n}{n}\PY{p}{;}
+\end{Verbatim}
+
+
+    \texttt{extern\ int\ n\ =\ 3;}と書くと、externがついていても、実態は定義なので、1度しか評価できない。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{extern} \PY{k+kt}{int} \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{double} \PY{n}{Double}\PY{o}{=}\PY{l+m+mf}{3.14}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+        \PY{k+kt}{int} \PY{n}{sum} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{val} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{;} \PY{n}{val} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{10}\PY{p}{;} \PY{o}{+}\PY{o}{+}\PY{n}{val}\PY{p}{)}
+        \PY{n}{sum} \PY{o}{+}\PY{o}{=} \PY{n}{val}\PY{p}{;}  \PY{c+c1}{// equivalent to sum = sum + val}
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{Sum of 1 to 10 inclusive is }\PY{l+s}{\PYZdq{}}
+        \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{sum} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+        \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{main}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}fstream\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}string\PYZgt{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZdq{}./mycpp/Sales\PYZus{}item.h\PYZdq{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+\end{Verbatim}
+
+
+    次はスコープの話。\\
+1から10まで合計するプログラムです。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{c+c1}{//template \PYZlt{}typename ...T\PYZgt{}}
+        \PY{k+kt}{int} \PY{n+nf}{sum}\PY{p}{(}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+            \PY{k+kt}{int} \PY{n}{sum} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;}
+            \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{val} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{;} \PY{n}{val} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{10}\PY{p}{;} \PY{o}{+}\PY{o}{+}\PY{n}{val}\PY{p}{)}
+                \PY{n}{sum} \PY{o}{+}\PY{o}{=} \PY{n}{val}\PY{p}{;} 
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{Sum of 1 to 10 inclusive is }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{sum} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    これはうまく行った。\texttt{Sum\ of\ 1\ to\ 10\ inclusive\ is\ 55}と表示される。のですが、なんとなく、\texttt{template\ \textless{}typename\ ...T\textgreater{}}がわからないので、ネットで検索したサンプルで少し実験します。
+
+次の例は引数がintでもdoubleでも同じ関数で計算するという、本来のtemplateの例と言っていいのかな。\\
+\texttt{constrexpr}がわからないのはともかく、これってグローバル変数なのですか。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{template}\PY{o}{\PYZlt{}}\PY{k}{class} \PY{n+nc}{T}\PY{o}{\PYZgt{}}
+        \PY{k}{constexpr} \PY{n}{T} \PY{n}{pi} \PY{o}{=} \PY{n}{T}\PY{p}{(}\PY{l+m+mf}{3.1415926535897932385}\PY{n}{L}\PY{p}{)}\PY{p}{;}  \PY{c+c1}{// variable template}
+        
+        \PY{k}{template}\PY{o}{\PYZlt{}}\PY{k}{class} \PY{n+nc}{T}\PY{o}{\PYZgt{}}
+        \PY{n}{T} \PY{n}{circular\PYZus{}area}\PY{p}{(}\PY{n}{T} \PY{n}{r}\PY{p}{)} \PY{c+c1}{// function template}
+        \PY{p}{\PYZob{}}
+            \PY{k}{return} \PY{n}{pi}\PY{o}{\PYZlt{}}\PY{n}{T}\PY{o}{\PYZgt{}} \PY{o}{*} \PY{n}{r} \PY{o}{*} \PY{n}{r}\PY{p}{;} \PY{c+c1}{// pi\PYZlt{}T\PYZgt{} is a variable template instantiation}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{circular\PYZus{}area}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{)}
+\end{Verbatim}
+
+
+    とりあえず期待していたように動く。
+
+\begin{verbatim}
+circular_area(1) // (int) 3
+circular_area(1.0) // (double) 3.1415927
+\end{verbatim}
+
+となります。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{template}\PY{o}{\PYZlt{}}\PY{k}{class} \PY{n+nc}{T}\PY{o}{\PYZgt{}}
+        \PY{k}{constexpr} \PY{n}{T} \PY{n}{pi} \PY{o}{=} \PY{n}{T}\PY{p}{(}\PY{l+m+mf}{3.1415926535897932385}\PY{n}{L}\PY{p}{)}\PY{p}{;}  \PY{c+c1}{// variable template}
+        
+        \PY{k}{template} \PY{o}{\PYZlt{}}\PY{k}{typename} \PY{n}{T}\PY{o}{\PYZgt{}}
+        \PY{n}{T} \PY{n}{add\PYZus{}pi}\PY{p}{(}\PY{n}{T} \PY{n}{x}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+            \PY{k}{return} \PY{n}{pi}\PY{o}{\PYZlt{}}\PY{n}{T}\PY{o}{\PYZgt{}} \PY{o}{+} \PY{n}{x}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{add\PYZus{}pi}\PY{p}{(}\PY{l+m+mf}{80.5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{template}\PY{o}{\PYZlt{}}\PY{k}{class} \PY{n+nc}{T}\PY{o}{\PYZgt{}}
+        \PY{c+c1}{// T three = T(3.0);}
+        \PY{c+c1}{// T three = 3;}
+        \PY{n}{T} \PY{n}{three} \PY{o}{=} \PY{l+s+sc}{\PYZsq{}}\PY{l+s+sc}{A}\PY{l+s+sc}{\PYZsq{}}\PY{p}{;}
+        \PY{k}{template}\PY{o}{\PYZlt{}}\PY{k}{class} \PY{n+nc}{T}\PY{o}{\PYZgt{}}
+        \PY{n}{T} \PY{n}{add\PYZus{}three}\PY{p}{(}\PY{n}{T} \PY{n}{x}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+            \PY{n}{three}\PY{o}{\PYZlt{}}\PY{n}{T}\PY{o}{\PYZgt{}} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{;}
+            \PY{k}{return} \PY{n}{three}\PY{o}{\PYZlt{}}\PY{n}{T}\PY{o}{\PYZgt{}} \PY{o}{+} \PY{n}{x}\PY{p}{;}
+        \PY{p}{\PYZcb{}}\PY{p}{;}
+        \PY{k}{template}\PY{o}{\PYZlt{}}\PY{k}{class} \PY{n+nc}{T}\PY{o}{\PYZgt{}}
+        \PY{n}{T} \PY{n}{add\PYZus{}twice}\PY{p}{(}\PY{n}{T} \PY{n}{x}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+           \PY{k}{return} \PY{n}{add\PYZus{}three}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{+} \PY{n}{x}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{add\PYZus{}twice}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}
+\end{Verbatim}
+
+
+    なるほど。少なくとも、JupyterのC++上では、グローバル変数のように扱える。\\
+よくわからないが、ま、先へ進もう。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{sum} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{!}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{;} \PY{o}{+}\PY{o}{+}\PY{n}{i}\PY{p}{)}
+            \PY{n}{sum} \PY{o}{+}\PY{o}{=}\PY{n}{i}\PY{p}{;}
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{i} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{:}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{sum} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    \texttt{100:45}と表示されます。
+
+100と表されるiとforの中のiがスコープが違うということかな。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{int} \PY{n+nf}{twice}\PY{p}{(}\PY{k+kt}{int} \PY{n}{x}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+            \PY{k}{return} \PY{n}{x}\PY{o}{+}\PY{n}{x}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{twice}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{twice}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{endl}\PY{p}{;}
+\end{Verbatim}
+
+
+    上の\texttt{twice}の例は、twice()を定義したセルがあって、twice()が使えるようになって、それを\texttt{cout}するにはヘッダーが必要、という例。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{k+kt}{int} \PY{n}{reused} \PY{o}{=} \PY{l+m+mi}{42}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{int} \PY{n+nf}{mymain}\PY{p}{(}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+            \PY{k+kt}{int} \PY{n}{unique} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{reused} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{unique} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{k+kt}{int} \PY{n}{reused} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{c+c1}{// new, local object named reused hides global reused}
+            \PY{c+c1}{// output \PYZsh{}2: uses local reused; prints 0 0}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{reused} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{unique} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{c+c1}{// output \PYZsh{}3: explicitly requests the global reused; prints 42 0}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{o}{:}\PY{o}{:}\PY{n}{reused} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{unique} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{mymain}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    これは、目的通り、
+
+\begin{verbatim}
+42 0
+0 0
+42 0
+\end{verbatim}
+
+と出力されます。
+
+うむ。またちょっと混乱してきた。上記のmymain()の定義の中でグローバル変数reusedを使っているので、そのセルを評価してからでないと評価できない。
+
+で、グローバル変数を評価しているセルの内容と一緒にして評価すると、ここでは関数定義できません、というエラーになる。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}iostream\PYZgt{}}
+        \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+        \PY{k+kt}{int} \PY{n}{reused} \PY{o}{=} \PY{l+m+mi}{42}\PY{p}{;} 
+        
+        \PY{k+kt}{int} \PY{n+nf}{mymain}\PY{p}{(}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+            \PY{k+kt}{int} \PY{n}{unique} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{reused} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{unique} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{k+kt}{int} \PY{n}{reused} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{c+c1}{// new, local object named reused hides global reused}
+            \PY{c+c1}{// output \PYZsh{}2: uses local reused; prints 0 0}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{reused} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{unique} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{c+c1}{// output \PYZsh{}3: explicitly requests the global reused; prints 42 0}
+            \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{o}{:}\PY{o}{:}\PY{n}{reused} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{unique} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{std}\PY{o}{:}\PY{o}{:}\PY{n}{endl}\PY{p}{;}
+            \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \texttt{error:\ function\ definition\ is\ not\ allowed\ here}となります。
+
+とりあえず、分ければいい、と覚えておこう。\\
+関数定義を複数やりたいときも分けて定義することになる。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{int} \PY{n+nf}{add\PYZus{}three}\PY{p}{(}\PY{k+kt}{int} \PY{n}{x}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+            \PY{k+kt}{int} \PY{n}{three} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{;}
+            \PY{k}{return} \PY{n}{three} \PY{o}{+} \PY{n}{x}\PY{p}{;}
+        \PY{p}{\PYZcb{}}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{int} \PY{n+nf}{add\PYZus{}twice}\PY{p}{(}\PY{k+kt}{int} \PY{n}{x}\PY{p}{)}
+        \PY{p}{\PYZob{}}
+           \PY{k}{return} \PY{n}{add\PYZus{}three}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{+} \PY{n}{x}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{add\PYZus{}twice}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}
+\end{Verbatim}
+
+
+    add\_three()の関数定義とadd\_twice()の関数定義を一つのセルに入れると、後のほうの定義がここでは関数定義はできませんというエラーになります。
+
+分ければ問題ない。\\
+しかし！！
+ちょっと前に\texttt{template\textless{}class\ T\textgreater{}}をつけて一つのファイルでやってたよね。\\
+あれは別世界の話か。\\
+勉強を続ければまた出てくるでしょう。
+
+\subsubsection{参照変数}\label{ux53c2ux7167ux5909ux6570}
+
+次は参照変数の話です。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kt}{int} \PY{n}{ival} \PY{o}{=} \PY{l+m+mi}{1024}\PY{p}{;}
+        \PY{k+kt}{int} \PY{o}{\PYZam{}}\PY{n}{refVal} \PY{o}{=} \PY{n}{ival}\PY{p}{;} \PY{c+c1}{// refValはivalの別名}
+        \PY{c+c1}{// int \PYZam{}refVal2; // エラー}
+        
+        \PY{n}{refVal}
+\end{Verbatim}
+
+
+    \texttt{1024}と表示されます。
+
+参照変数は値をコピーするのではなくて、同じオブジェクトに束縛されます。
+束縛先を変えることはできません。定義時に初期化する（束縛する）必要があります。\\
+参照変数はオブジェクトではなく、aliasです。
+
+次の例ではrefValに2を代入すると、ivalが2になっているのがわかります。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{refVal} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{;}
+        \PY{n}{ival}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
